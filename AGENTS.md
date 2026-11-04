@@ -2,13 +2,14 @@
 
 Hypermetapunk is the third design system in Bleve's family, child of Storeybrook (day) and Depthfield (night). This repo is its source: `project/` (the system), `docs.html` (its docs) and `index.html` (its front page).
 
-Read these first: the family plan at <https://github.com/stevoblevo/depthfield/blob/main/docs/family.md> (tasks H1 to H5 are this system's), `docs/plan.md`, and `project/README.md` (the brand book).
+Read these first: `docs/plan.md` (this system's tasks, in a suggested order), `docs/creative-direction.md` (the picture behind them), `project/README.md` (the brand book), and the family plan at <https://github.com/stevoblevo/depthfield/blob/main/docs/family.md> (contracts shared with Storeybrook and Depthfield).
 
 ## Build and check
 
 ```
 python3 -I site/build.py
 python3 -I tools/contrast.py
+node tools/check.mjs                  # front page and docs, three themes, desktop and phone (needs Playwright)
 python3 -m http.server 8703
 ```
 Before pushing: the build leaves no diff, the contrast check passes, and the front page and docs show no console errors and no sideways scroll at 390 px. Add `?hmp-taste` to a page you made and fix what it flags.

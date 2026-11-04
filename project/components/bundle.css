@@ -139,6 +139,7 @@ button.hmp-sticker { cursor: pointer; }
 :where(.hmp-card) a { color: var(--link); }
 /* a paper card prints with Zine's inks in every theme: neon signals are tuned for the void, not for paper */
 .hmp-card:not(.hmp-card--glass) { --accent: #c2006a; --cue: #006a46; --link: #0050a8; --scrawl: #c2006a; --focus: #ff5a00; }
+[data-theme="contrast"] .hmp-card:not(.hmp-card--glass) { --accent: #e8ff00; --cue: #05ffa1; --link: #7fe9ff; --scrawl: #e8ff00; --focus: #e8ff00; }   /* High contrast cards are black, not paper: keep its own inks */
 .hmp-card h3, .hmp-card .hmp-title { margin: 0 0 var(--space-2); font: 400 22px/1.15 var(--font-display); text-transform: uppercase; }
 .hmp-card--glass { background: color-mix(in srgb, var(--surface-raised) 86%, transparent); color: var(--ink); border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line)); border-radius: var(--r-lg); box-shadow: var(--hmp-glow), var(--shadow-float); clip-path: none; padding-bottom: var(--space-6); -webkit-backdrop-filter: blur(10px) saturate(1.4); backdrop-filter: blur(10px) saturate(1.4); }
 :where(.hmp-card--glass) a { color: var(--link); }
