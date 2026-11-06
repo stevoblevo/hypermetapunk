@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:wght@400..700&family=Archivo:ital,wght@0,400..800;1,400..800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Permanent+Marker&display=swap");
-/* Hypermetapunk 0.1.0 — component styles. Lifted from "Hypermetapunk Kit v0" (storeybrook/show-tell/bespoke,
+/* Hypermetapunk 0.1.1 — component styles. Lifted from "Hypermetapunk Kit v0" (storeybrook/show-tell/bespoke,
    1 Nov 2026), parents Storeybrook × Depthfield: hyperreal dusk surfaces slapped with punk print culture.
    Class names keep the kit's (hmp-chrome, hmp-gridfloor, hmp-sticker, hmp-stamp, hmp-tape, hmp-scrawl, hmp-misreg,
    hmp-grain) so the first hosts can move over without renaming. Family tasks H2 and H3. */
@@ -38,8 +38,14 @@
 }
 @keyframes hmp-sheen { 0%, 100% { background-position: 50% 0%; } 50% { background-position: 50% 62%; } }
 [data-theme="zine"] .hmp-chrome { filter: drop-shadow(3px 3px 0 var(--punk-magenta)); animation: none; }
-[data-theme="contrast"] .hmp-chrome { color: var(--ink); background: none; filter: none; animation: none; }
-@media (forced-colors: active) { .hmp-chrome { color: CanvasText; background: none; filter: none; } }
+/* plan P1: the sun and type can overlap. A solid ground-coloured keyline keeps
+   every glyph separate from the white sun without flattening the composition. */
+[data-theme="contrast"] .hmp-chrome {
+  color: var(--ink); background: none; filter: none; animation: none;
+  -webkit-text-stroke: 0.08em var(--void); paint-order: stroke fill;
+  text-shadow: 2px 0 var(--void), -2px 0 var(--void), 0 2px var(--void), 0 -2px var(--void), 2px 2px var(--void), -2px -2px var(--void), 2px -2px var(--void), -2px 2px var(--void);
+}
+@media (forced-colors: active) { [data-theme] .hmp-chrome { color: CanvasText; background: Canvas; filter: none; text-shadow: none; -webkit-text-stroke: 0; } }
 
 /* ---------- Sun: the banded disc at the horizon ---------- */
 .hmp-sun {

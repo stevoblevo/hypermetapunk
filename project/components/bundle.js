@@ -1,11 +1,11 @@
-/* Hypermetapunk 0.1.0 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
+/* Hypermetapunk 0.1.1 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
    window.Hypermetapunk: theme, still (motion off), ticker, slap, taste, token, reducedMotion, init.
    Parents: Storeybrook × Depthfield. Family tasks H2 and H3 (stevoblevo/depthfield, docs/family.md).
    Everything degrades: with JS off the markup reads in order, stickers sit where they were put and tickers wrap. */
 (function (w, d) {
   'use strict';
   if (w.Hypermetapunk && w.Hypermetapunk.version) return;
-  var VERSION = '0.1.0';
+  var VERSION = '0.1.1';
   var THEMES = [
     { id: 'dusk', name: 'Dusk', light: false, motion: true, print: false, line: 'Neon at the horizon, chrome over violet' },
     { id: 'zine', name: 'Zine', light: true, motion: true, print: true, line: 'Photocopied in daylight, stapled, stickered' },

@@ -1,0 +1,17 @@
+{
+  "latest": "0.1.1",
+  "versions": {
+    "0.1.0": {
+      "tokens.css": "3e3cedcd2934458657c4dfd81b23ff513ef90c1425b9e0bc0a16b74ae2c3e58b",
+      "bundle.css": "9387473d3257f61aab61b1cac9f3d8cf80b448b3af5cc63d9295411b9f46229c",
+      "bundle.js": "7be5629229dc4fbaacb6328e4217c7f8882539f853c8fdc9c635008e1691ef3f",
+      "index.d.ts": "af28af28268e30c5a9224b8e33fd6648aebc63827ff97cac5f15a5ccf8ee90a4"
+    },
+    "0.1.1": {
+      "tokens.css": "3e3cedcd2934458657c4dfd81b23ff513ef90c1425b9e0bc0a16b74ae2c3e58b",
+      "bundle.css": "d7691d6b9c1de85a8d4015178ff2b2e1e0a5641fc9a9a88c2b63da9bbce720c0",
+      "bundle.js": "f05e889f3f437d2192354318f1d2ee2dcb14ac91d1e7e0ef9aaf31300187bb2a",
+      "index.d.ts": "e8d3b81a5d96690a17b16e5a919e3fb285518f8363d53733826d1278b2d3a48e"
+    }
+  }
+}

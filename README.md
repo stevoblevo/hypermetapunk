@@ -40,3 +40,9 @@ python3 -I tools/contrast.py      # fails if any text pair drops under 4.5:1
 node tools/check.mjs              # front page and docs in three themes, desktop and phone (needs Playwright)
 python3 -m http.server 8703       # then open / and /docs.html
 ```
+
+## Versioned runtime
+
+Current patch: **0.1.1**. Pin `v/0.1.1/tokens.css`, `v/0.1.1/bundle.css` and `v/0.1.1/bundle.js` together. The original 0.1.0 runtime remains in `v/0.1.0/`. `v/index.json` records each file’s SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version.
+
+See [CHANGELOG.md](CHANGELOG.md). A GitHub Pages deployment is not a browser-test pass.

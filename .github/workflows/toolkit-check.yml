@@ -1,0 +1,33 @@
+name: Toolkit quality gate
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Rebuild and verify immutable runtimes
+        run: |
+          python3 -I site/build.py
+          python3 -I tools/release.py
+          git diff --exit-code
+          python3 -I tools/contrast.py
+          node --check project/components/bundle.js
+      - name: Install pinned browser test driver
+        run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Browser regression checks (sandbox required)
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+        run: node tools/check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: toolkit-browser-evidence
+          path: test-results/
+          if-no-files-found: warn

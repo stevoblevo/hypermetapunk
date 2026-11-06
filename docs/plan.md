@@ -43,3 +43,10 @@ Owner: Bleve. Last updated 3 Nov 2026 by Claude (session 01ApCRaiX6JVCSowgVuAsG4
 
 - Optional camera play (slap with a gesture): off by default, explicit consent every visit, in-browser only, visible indicator; see `docs/creative-direction.md` section 10.
 - Moving bespoke.gig out of the Storeybrook repo into a home of its own.
+
+## Patch releases requested 6 November 2026
+
+| ID | Task | Acceptance | Who | Status |
+| --- | --- | --- | --- | --- |
+| P1 | 0.1.1: keep WORK readable where Chrome crosses the high-contrast sun | Exact Chrome preview at phone and desktop sizes; no lost glyphs; other themes unchanged | Sae(lion) | doing on sae/0.1.1-work-legibility |
+| P2 | 0.1.2: configurable accent colours | Accessible text pairing, theme changes, persistence, reset and existing API compatibility | Sae(lion) | queued separately |

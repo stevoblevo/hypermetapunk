@@ -1,52 +1,65 @@
-// A quick check for any agent before pushing: the front page and the docs in all three themes, desktop and phone.
-// Fails on a console error, a page check (taste) warning on the front page, sideways scroll at 390 px, or a docs
-// page without all its previews. Needs Playwright with Chromium; serves the repo itself on a free port.
-//   node tools/check.mjs
+// Browser gate: real docs previews, theme changes, layered type and phone layout.
+// Requires Playwright and a sandbox-capable Chromium. A missing browser is a failure.
+import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
-import { extname, join, normalize } from 'node:path';
+import { readFile, mkdir } from 'node:fs/promises';
+import { extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
-
 const ROOT = normalize(join(fileURLToPath(import.meta.url), '..', '..'));
-const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.md': 'text/markdown', '.webmanifest': 'application/manifest+json' };
+const TYPES = { '.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.json':'application/json', '.svg':'image/svg+xml', '.png':'image/png', '.md':'text/markdown', '.webmanifest':'application/manifest+json' };
 const server = createServer(async (req, res) => {
-  let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-  if (p.endsWith('/')) p += 'index.html';
-  const file = normalize(join(ROOT, p));
-  if (!file.startsWith(ROOT)) { res.writeHead(403).end(); return; }
-  try { res.writeHead(200, { 'content-type': TYPES[extname(file)] || 'application/octet-stream' }).end(await readFile(file)); }
-  catch { res.writeHead(404).end('not found'); }
+  try {
+    let path = decodeURIComponent(new URL(req.url,'http://x').pathname);
+    if(path.endsWith('/')) path += 'index.html';
+    const file = normalize(join(ROOT,path));
+    if(!file.startsWith(ROOT+sep)) { res.writeHead(403).end(); return; }
+    const data = await readFile(file); res.writeHead(200,{'content-type':TYPES[extname(file)]||'application/octet-stream'}).end(data);
+  } catch { res.writeHead(404).end('not found'); }
 });
-await new Promise(r => server.listen(0, '127.0.0.1', r));
-const base = `http://127.0.0.1:${server.address().port}`;
-
-let playwright;
-try { playwright = await import('playwright'); }
-catch { try { playwright = createRequire(import.meta.url)('playwright'); /* a global install (NODE_PATH) */ } catch { console.log('Playwright is not installed here; skipping the browser check.'); server.close(); process.exit(0); } }
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const problems = [];
-const browser = await playwright.chromium.launch();
-const watch = (page, tag) => {
-  page.on('pageerror', e => problems.push(`${tag}: ${String(e).slice(0, 200)}`));
-  page.on('console', m => { if (m.type() === 'error' && !/favicon|fonts\.g/.test(m.text())) problems.push(`${tag}: ${m.text().slice(0, 200)}`); });
-};
-const desk = await browser.newPage({ viewport: { width: 1360, height: 860 } }); watch(desk, 'desktop');
-for (const theme of ['dusk', 'zine', 'contrast']) {
-  await desk.goto(`${base}/?theme=${theme}`); await sleep(1500);
-  const warn = await desk.evaluate(() => window.Hypermetapunk.taste({ log: false }).filter(f => f.severity === 'warn').map(f => `${f.rule}: ${f.sample}`));
-  warn.forEach(w => problems.push(`front (${theme}) taste: ${w}`));
-}
-await desk.goto(`${base}/docs.html#/components`); await sleep(3000);
-const previews = await desk.evaluate(() => document.querySelectorAll('iframe').length);
-const comps = JSON.parse(await readFile(join(ROOT, 'site', 'site.json'), 'utf8')).components.length;
-if (previews < comps) problems.push(`docs: ${previews} previews for ${comps} components`);
-const phone = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }); watch(phone, 'phone');
-for (const path of ['/', '/docs.html']) {
-  await phone.goto(base + path); await sleep(1500);
-  const over = await phone.evaluate(() => document.documentElement.scrollWidth - innerWidth);
-  if (over > 0) problems.push(`phone ${path}: ${over}px sideways scroll`);
-}
-await browser.close(); server.close();
-if (problems.length) { console.log('Problems:\n- ' + problems.join('\n- ')); process.exit(1); }
-console.log(`OK: front page in three themes, ${previews} previews, no sideways scroll at 390 px, no console errors.`);
+let browser;
+try {
+  const { chromium } = createRequire(import.meta.url)('playwright');
+  await new Promise(r=>server.listen(0,'127.0.0.1',r));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  await mkdir(join(ROOT,'test-results'),{recursive:true});
+  browser = await chromium.launch({chromiumSandbox:true, ...(process.env.CHROME_BIN?{executablePath:process.env.CHROME_BIN}:{})});
+  const problems=[];
+  const page = await browser.newPage({viewport:{width:1360,height:860}});
+  page.on('pageerror',e=>problems.push(String(e)));
+  for(const theme of ['dusk','zine','contrast']) {
+    await page.goto(`${base}/?theme=${theme}`);
+    await page.evaluate(()=>document.fonts.ready);
+    assert.equal(await page.evaluate(()=>window.Hypermetapunk.theme.get()),theme);
+    const warnings=await page.evaluate(()=>window.Hypermetapunk.taste({log:false}).filter(x=>x.severity==='warn'));
+    assert.deepEqual(warnings,[],`${theme} front-page taste`);
+    await page.goto(`${base}/docs.html?theme=${theme}#/components/Chrome`);
+    const iframe=page.locator('iframe.frame').first(); await iframe.waitFor();
+    const frame=await iframe.contentFrame();
+    await frame.locator('h1').waitFor(); await frame.locator('h1').evaluate(el=>el.ownerDocument.fonts.ready);
+    assert.equal(await frame.locator('h1').textContent(),'Strange work');
+    if(theme==='contrast') {
+      const outline=await frame.locator('h1').evaluate(el=>{const s=getComputedStyle(el);return {width:parseFloat(s.webkitTextStrokeWidth),stroke:s.webkitTextStrokeColor,fill:s.color,order:s.paintOrder};});
+      assert.ok(outline.width>=3,`Layered chrome requires a solid keyline: ${JSON.stringify(outline)}`);
+      assert.notEqual(outline.stroke,outline.fill,'The sun must not swallow white letters');
+      assert.match(outline.order,/stroke/);
+    }
+    await iframe.screenshot({path:join(ROOT,`test-results/chrome-${theme}.png`)});
+  }
+  await page.goto(`${base}/docs.html#/components`);
+  const count=JSON.parse(await readFile(join(ROOT,'site/site.json'),'utf8')).components.length;
+  await page.waitForFunction(n=>document.querySelectorAll('iframe.frame').length===n,count);
+  const phone=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
+  phone.on('pageerror',e=>problems.push(String(e)));
+  for(const path of ['/?theme=contrast','/docs.html?theme=contrast#/components/Chrome']) {
+    await phone.goto(base+path); await phone.evaluate(()=>document.fonts.ready);
+    assert.equal(await phone.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`Phone overflow: ${path}`);
+  }
+  await phone.screenshot({path:join(ROOT,'test-results/chrome-phone.png'),fullPage:true});
+  await page.emulateMedia({forcedColors:'active'});
+  await page.goto(`${base}/docs.html?theme=contrast#/components/Chrome`);
+  const fc=await page.locator('iframe.frame').first().contentFrame();await fc.locator('h1').waitFor();
+  assert.equal(await fc.locator('h1').evaluate(el=>getComputedStyle(el).webkitTextStrokeWidth),'0px');
+  assert.deepEqual(problems,[]);
+  console.log(`PASS: three themes; ${count} docs previews; layered Chrome keyline; forced colours; 390px layout; no page exceptions.`);
+} finally { if(browser) await browser.close(); server.close(); }
