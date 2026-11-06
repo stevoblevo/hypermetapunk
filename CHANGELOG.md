@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3
+
+- Paper cards now scope `on-accent` and `on-cue` with their local fill colours. Accent buttons nested inside a card no longer inherit an incompatible outer-theme ink.
+- Adds browser-measured contrast tests for nested accent buttons across every theme and custom accent choice.
+- All published 0.1.0, 0.1.1 and 0.1.2 runtime files remain unchanged.
+
 ## 0.1.2
 
 - Adds five accent presets, a custom colour picker and reset on the showcase and in the reusable Accent component.

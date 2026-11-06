@@ -4,7 +4,7 @@ Hypermetapunk is the third design system in Bleve's family, the child of Storeyb
 
 It began as a block of CSS at the top of one page, "Hypermetapunk Kit v0", written for bespoke.gig on 1 November 2026 (in `storeybrook/show-tell/bespoke/`). Version 0.1 lifts that seed into the family's format: tokens with themes, components with guidelines and live previews, a behaviour bundle, and this book.
 
-Current runtime: **0.1.2**. The 0.1.1 Chrome keyline keeps lettering readable over the High contrast sun; 0.1.2 adds [custom accents](components/Accent/README.md). Original runtime versions remain available under `v/`.
+Current runtime: **0.1.3**. The 0.1.1 Chrome keyline keeps lettering readable over the High contrast sun; 0.1.2 adds [custom accents](components/Accent/README.md). Original runtime versions remain available under `v/`.
 
 ## When to use it
 

@@ -43,7 +43,7 @@ python3 -m http.server 8703       # then open / and /docs.html
 
 ## Versioned runtime
 
-Current patch: **0.1.2**. Pin `v/0.1.2/tokens.css`, `v/0.1.2/bundle.css` and `v/0.1.2/bundle.js` together. The original 0.1.0 runtime remains in `v/0.1.0/`. `v/index.json` records each file’s SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version.
+Current patch: **0.1.3**. Pin `v/0.1.3/tokens.css`, `v/0.1.3/bundle.css` and `v/0.1.3/bundle.js` together. The original 0.1.0 runtime remains in `v/0.1.0/`. `v/index.json` records each file’s SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version.
 
 See [CHANGELOG.md](CHANGELOG.md). A GitHub Pages deployment is not a browser-test pass.
 

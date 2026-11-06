@@ -71,6 +71,21 @@ try {
   await accentFrame.locator('[data-hmp-accent-status]').waitFor();
   assert.match(await accentFrame.locator('[data-hmp-accent-status]').textContent(),/13:1/);
   await page.locator('iframe.frame').first().screenshot({path:join(ROOT,'test-results/accents-contrast.png')});
+  // A paper card owns both its accent fill and its paired text ink.
+  for (const theme of ['dusk','zine','contrast']) {
+    await page.goto(`${base}/?theme=${theme}`);
+    for (const accent of [null,'#000000','#ffffff','#e8ff00','#ff5cba','#05ffa1']) {
+      const result=await page.evaluate(color=>{
+        const H=window.Hypermetapunk; if(color) H.accent.set(color,{keep:false}); else H.accent.reset({keep:false});
+        let fixture=document.getElementById('card-ink-fixture');
+        if(!fixture){fixture=document.createElement('article'); fixture.id='card-ink-fixture'; fixture.className='hmp-card'; fixture.innerHTML='<button class="hmp-btn hmp-btn--accent">Nested accent</button>';document.body.appendChild(fixture);}
+        const style=getComputedStyle(fixture.querySelector('button'));
+        function lum(text){const v=text.match(/[\d.]+/g).slice(0,3).map(Number).map(n=>{n/=255;return n<=.04045?n/12.92:((n+.055)/1.055)**2.4;});return .2126*v[0]+.7152*v[1]+.0722*v[2];}
+        const a=lum(style.color),b=lum(style.backgroundColor);return {ratio:(Math.max(a,b)+.05)/(Math.min(a,b)+.05),color:style.color,background:style.backgroundColor};
+      },accent);
+      assert.ok(result.ratio >= 4.5,`${theme}/${accent}: nested card ${JSON.stringify(result)}`);
+    }
+  }
   await page.goto(`${base}/docs.html#/components`);
   const count=JSON.parse(await readFile(join(ROOT,'site/site.json'),'utf8')).components.length;
   await page.waitForFunction(n=>document.querySelectorAll('iframe.frame').length===n,count);

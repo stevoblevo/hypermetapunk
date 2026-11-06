@@ -1,4 +1,4 @@
-/* Hypermetapunk 0.1.2 · types, as documentation of window.Hypermetapunk */
+/* Hypermetapunk 0.1.3 · types, as documentation of window.Hypermetapunk */
 type HmpThemeId = 'dusk' | 'zine' | 'contrast';
 interface HmpLook { id: HmpThemeId; name: string; light: boolean; motion: boolean; print: boolean; line: string; }
 interface HmpFinding { rule: string; severity: 'warn' | 'info'; count: number; sample: string; fix: string; }
