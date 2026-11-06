@@ -1,6 +1,6 @@
 # Hypermetapunk
 
-The third design system in Bleve's family, the child of [Storeybrook](https://github.com/stevoblevo/storeybrook) (day) and [Depthfield](https://github.com/stevoblevo/depthfield) (night): hyperreal dusk, chrome and neon, slapped with stickers, stamps, tape and marker. Three themes (Dusk, Zine, High contrast), thirteen components and a behaviour bundle exposed as `window.Hypermetapunk`.
+The third design system in Bleve's family, the child of [Storeybrook](https://github.com/stevoblevo/storeybrook) (day) and [Depthfield](https://github.com/stevoblevo/depthfield) (night): hyperreal dusk, chrome and neon, slapped with stickers, stamps, tape and marker. Three themes (Dusk, Zine, High contrast), fourteen components and a behaviour bundle exposed as `window.Hypermetapunk`.
 
 Version 0.1 lifts "Hypermetapunk Kit v0", a block of CSS seeded on 1 November 2026 at the top of a bespoke.gig prototype (`storeybrook/show-tell/bespoke/bespoke-gig-hypermetapunk.html`), into the family's format. Unlike its parents it has no Claude artifact yet; this repo is the source until one is made (task C11).
 
@@ -43,6 +43,10 @@ python3 -m http.server 8703       # then open / and /docs.html
 
 ## Versioned runtime
 
-Current patch: **0.1.1**. Pin `v/0.1.1/tokens.css`, `v/0.1.1/bundle.css` and `v/0.1.1/bundle.js` together. The original 0.1.0 runtime remains in `v/0.1.0/`. `v/index.json` records each file’s SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version.
+Current patch: **0.1.2**. Pin `v/0.1.2/tokens.css`, `v/0.1.2/bundle.css` and `v/0.1.2/bundle.js` together. The original 0.1.0 runtime remains in `v/0.1.0/`. `v/index.json` records each file’s SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version.
 
 See [CHANGELOG.md](CHANGELOG.md). A GitHub Pages deployment is not a browser-test pass.
+
+## Custom accents (0.1.2)
+
+Use the controls under “Three themes, one page”, or call `Hypermetapunk.accent.set('#e8ff00')`. Choices are separate per theme; unreadable colours are adjusted and disclosed. `Hypermetapunk.accent.reset()` restores the original. See [Accent](project/components/Accent/README.md) for the API.

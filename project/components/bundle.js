@@ -1,11 +1,11 @@
-/* Hypermetapunk 0.1.1 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
+/* Hypermetapunk 0.1.2 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
    window.Hypermetapunk: theme, still (motion off), ticker, slap, taste, token, reducedMotion, init.
    Parents: Storeybrook × Depthfield. Family tasks H2 and H3 (stevoblevo/depthfield, docs/family.md).
    Everything degrades: with JS off the markup reads in order, stickers sit where they were put and tickers wrap. */
 (function (w, d) {
   'use strict';
   if (w.Hypermetapunk && w.Hypermetapunk.version) return;
-  var VERSION = '0.1.1';
+  var VERSION = '0.1.2';
   var THEMES = [
     { id: 'dusk', name: 'Dusk', light: false, motion: true, print: false, line: 'Neon at the horizon, chrome over violet' },
     { id: 'zine', name: 'Zine', light: true, motion: true, print: true, line: 'Photocopied in daylight, stapled, stickered' },
@@ -33,6 +33,7 @@
       root.setAttribute('data-theme', id); if (!(o && o.keep === false)) put('hmp:theme', id);
       $$('[data-hmp-theme]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-hmp-theme') === id)); });
       var meta = d.querySelector('meta[name="theme-color"]'); if (meta) { var v = token('void'); if (v) meta.setAttribute('content', v); }
+      if (accent) applyAccent();
       emit('theme', { theme: id }); return id;
     },
     init: function () {
@@ -44,6 +45,97 @@
       theme.set(start, { keep: !!(q || saved) });
     }
   };
+
+  /* ---------- plan P2: an accent is a choice, never an unreadable text pair ---------- */
+  var ACCENT_KEY = 'hmp:accents', accentChoices = {}, accentResult = null, accentOriginal = null;
+  var accentPresets = [
+    { name: 'Acid', color: '#e8ff00' }, { name: 'Pink', color: '#ff5cba' },
+    { name: 'Cyan', color: '#7fe9ff' }, { name: 'Mint', color: '#05ffa1' },
+    { name: 'Orange', color: '#ff914d' }
+  ];
+  function hex(value) {
+    if (typeof value !== 'string' || !/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)) return null;
+    value = value.toLowerCase();
+    return value.length === 4 ? '#' + value.slice(1).split('').map(function (c) { return c + c; }).join('') : value;
+  }
+  function rgbColor(value) {
+    var h = hex(value); if (h) return [1, 3, 5].map(function (i) { return parseInt(h.slice(i, i + 2), 16); });
+    var m = /^rgba?\(\s*(\d+(?:\.\d+)?)[, ]+\s*(\d+(?:\.\d+)?)[, ]+\s*(\d+(?:\.\d+)?)/.exec(value);
+    return m ? [+m[1], +m[2], +m[3]] : null;
+  }
+  function luminance(c) {
+    var v = c.map(function (n) { n /= 255; return n <= 0.04045 ? n / 12.92 : Math.pow((n + 0.055) / 1.055, 2.4); });
+    return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
+  }
+  function contrastRatio(a, b) { var x = luminance(a), y = luminance(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+  function hexColor(c) { return '#' + c.map(function (n) { return ('0' + n.toString(16)).slice(-2); }).join(''); }
+  function resolveAccent(requested) {
+    var start = rgbColor(requested), floor = theme.get() === 'contrast' ? 13 : 4.5;
+    var grounds = ['void', 'surface', 'surface-raised'].map(function (name) { return rgbColor(token(name)); });
+    if (grounds.some(function (g) { return !g; })) return null; // unknown host tokens: do not guess at accessibility
+    var black = [0, 0, 0], white = [255, 255, 255];
+    function valid(c) { return grounds.every(function (g) { return contrastRatio(c, g) >= floor; }) && Math.max(contrastRatio(c, black), contrastRatio(c, white)) >= floor; }
+    var chosen = start;
+    if (!valid(chosen)) {
+      chosen = null;
+      // Smallest byte-space adjustment toward either endpoint. Keep hue where possible.
+      for (var step = 1; step <= 255 && !chosen; step++) {
+        [black, white].some(function (end) {
+          var candidate = start.map(function (n, i) { return Math.round(n + (end[i] - n) * step / 255); });
+          if (valid(candidate)) { chosen = candidate; return true; } return false;
+        });
+      }
+    }
+    if (!chosen) return null;
+    var color = hexColor(chosen), onColor = contrastRatio(chosen, black) >= contrastRatio(chosen, white) ? '#000000' : '#ffffff';
+    return { requested: requested, color: color, onColor: onColor, adjusted: color !== requested, minimumContrast: floor };
+  }
+  function readAccentChoices() {
+    accentChoices = {};
+    try { var saved = JSON.parse(get(ACCENT_KEY) || '{}'); IDS.forEach(function (id) { if (saved && hex(saved[id])) accentChoices[id] = hex(saved[id]); }); } catch (e) { /* corrupt or blocked storage */ }
+  }
+  function syncAccentControls() {
+    var selected = accentChoices[theme.get()] || null;
+    $$('[data-hmp-accent]').forEach(function (b) { b.setAttribute('aria-pressed', String(!!selected && hex(b.getAttribute('data-hmp-accent')) === selected)); });
+    $$('[data-hmp-accent-input]').forEach(function (input) { input.value = selected || hex(token('accent')) || '#e8ff00'; });
+    $$('[data-hmp-accent-status]').forEach(function (out) {
+      out.textContent = accentResult ? (accentResult.adjusted ? 'Adjusted to ' + accentResult.color + ' for readable text (' + accentResult.minimumContrast + ':1 or more).' : 'Accent ' + accentResult.color + '. Text contrast ' + accentResult.minimumContrast + ':1 or more.') : 'Using this theme’s original accent.';
+    });
+  }
+  function applyAccent() {
+    if (accentOriginal) {
+      ['--accent', '--on-accent'].forEach(function (name) {
+        var old = accentOriginal[name];
+        if (old.value) root.style.setProperty(name, old.value, old.priority); else root.style.removeProperty(name);
+      });
+    }
+    var requested = accentChoices[theme.get()]; accentResult = requested ? resolveAccent(requested) : null;
+    if (accentResult && !accentOriginal) {
+      accentOriginal = {};
+      ['--accent', '--on-accent'].forEach(function (name) { accentOriginal[name] = { value: root.style.getPropertyValue(name), priority: root.style.getPropertyPriority(name) }; });
+    }
+    if (accentResult) { root.style.setProperty('--accent', accentResult.color); root.style.setProperty('--on-accent', accentResult.onColor); }
+    syncAccentControls();
+    return accentResult ? Object.assign({}, accentResult) : null;
+  }
+  var accent = {
+    presets: function () { return accentPresets.map(function (p) { return Object.assign({}, p); }); },
+    get: function () { return accentResult ? Object.assign({}, accentResult) : null; },
+    set: function (value, options) {
+      var requested = hex(value); if (!requested) throw new TypeError('Accent must be a #RGB or #RRGGBB colour.');
+      accentChoices[theme.get()] = requested; var result = applyAccent();
+      if (!(options && options.keep === false)) put(ACCENT_KEY, JSON.stringify(accentChoices));
+      emit('accent', { theme: theme.get(), accent: result }); return result;
+    },
+    reset: function (options) {
+      delete accentChoices[theme.get()]; var result = applyAccent();
+      if (!(options && options.keep === false)) put(ACCENT_KEY, JSON.stringify(accentChoices));
+      emit('accent', { theme: theme.get(), accent: result }); return result;
+    }
+  };
+  readAccentChoices();
+  if (w.MutationObserver) new w.MutationObserver(function () { applyAccent(); }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  w.addEventListener('storage', function (e) { if (e.key === ACCENT_KEY || e.key === null) { readAccentChoices(); applyAccent(); } });
 
   /* ---------- still: a page-level "motion off", for people who did not set it in their system ---------- */
   var still = {
@@ -132,6 +224,10 @@
     root.classList.add('hmp-root'); if (d.body) d.body.classList.remove('hmp-no-js');
     $$('[data-hmp-theme]').forEach(function (b) { if (b.__hmp) return; b.__hmp = true; b.setAttribute('aria-pressed', String(b.getAttribute('data-hmp-theme') === theme.get())); b.addEventListener('click', function () { theme.set(b.getAttribute('data-hmp-theme')); }); });
     $$('[data-hmp-still]').forEach(function (b) { if (b.__hmps) return; b.__hmps = true; b.setAttribute('aria-pressed', String(still.get())); b.addEventListener('click', function () { still.set(!still.get()); }); });
+    $$('[data-hmp-accent]').forEach(function (b) { if (b.__hmpa) return; b.__hmpa = true; b.addEventListener('click', function () { accent.set(b.getAttribute('data-hmp-accent')); }); });
+    $$('[data-hmp-accent-input]').forEach(function (input) { if (input.__hmpa) return; input.__hmpa = true; input.addEventListener('input', function () { if (hex(input.value)) accent.set(input.value); }); });
+    $$('[data-hmp-accent-reset]').forEach(function (b) { if (b.__hmpa) return; b.__hmpa = true; b.addEventListener('click', function () { accent.reset(); }); });
+    syncAccentControls();
     $$('.hmp-ticker').forEach(ticker);
     $$('[data-hmp-slap]').forEach(function (f) { slap(f); });
     if (/[?&#]hmp-taste\b/.test(w.location.href)) setTimeout(function () { taste.badge(); }, 700);
@@ -139,7 +235,7 @@
     return API;
   }
 
-  var API = { version: VERSION, themes: THEMES, looks: THEMES, init: init, theme: theme, still: still, ticker: ticker, slap: slap, taste: taste, token: token, reducedMotion: reduced };
+  var API = { version: VERSION, themes: THEMES, looks: THEMES, init: init, theme: theme, accent: accent, still: still, ticker: ticker, slap: slap, taste: taste, token: token, reducedMotion: reduced };
   w.Hypermetapunk = API;
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', init); else init();
 })(window, document);

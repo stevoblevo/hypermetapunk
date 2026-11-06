@@ -46,6 +46,31 @@ try {
     }
     await iframe.screenshot({path:join(ROOT,`test-results/chrome-${theme}.png`)});
   }
+  // Public controls and API: selection survives a reload, themes keep separate choices,
+  // reset restores defaults, and the docs preview follows host theme changes.
+  await page.goto(`${base}/?theme=dusk`);
+  await page.locator('[data-hmp-accent="#7fe9ff"]').click();
+  assert.equal(await page.evaluate(()=>window.Hypermetapunk.accent.get().requested),'#7fe9ff');
+  await page.reload();
+  assert.equal(await page.evaluate(()=>window.Hypermetapunk.accent.get().requested),'#7fe9ff');
+  await page.locator('[data-hmp-theme="zine"]').first().click();
+  assert.equal(await page.evaluate(()=>window.Hypermetapunk.accent.get()),null);
+  await page.locator('[data-hmp-accent="#e8ff00"]').click();
+  assert.equal(await page.evaluate(()=>window.Hypermetapunk.accent.get().adjusted),true);
+  await page.locator('[data-hmp-accent-input]').fill('#000000');
+  assert.equal(await page.evaluate(()=>window.Hypermetapunk.accent.get().requested),'#000000');
+  await page.locator('[data-hmp-accent-reset]').click();
+  assert.equal(await page.evaluate(()=>window.Hypermetapunk.accent.get()),null);
+  await page.evaluate(()=>{window.Hypermetapunk.init(); window.Hypermetapunk.init();});
+  await page.locator('[data-hmp-accent="#ff5cba"]').press('Enter');
+  assert.equal(await page.evaluate(()=>window.Hypermetapunk.accent.get().requested),'#ff5cba');
+  await page.screenshot({path:join(ROOT,'test-results/accents-zine.png'),fullPage:true});
+  await page.goto(`${base}/docs.html?theme=contrast#/components/Accent`);
+  const accentFrame=page.frameLocator('iframe.frame').first();
+  await accentFrame.locator('[data-hmp-accent="#ff914d"]').click();
+  await accentFrame.locator('[data-hmp-accent-status]').waitFor();
+  assert.match(await accentFrame.locator('[data-hmp-accent-status]').textContent(),/13:1/);
+  await page.locator('iframe.frame').first().screenshot({path:join(ROOT,'test-results/accents-contrast.png')});
   await page.goto(`${base}/docs.html#/components`);
   const count=JSON.parse(await readFile(join(ROOT,'site/site.json'),'utf8')).components.length;
   await page.waitForFunction(n=>document.querySelectorAll('iframe.frame').length===n,count);

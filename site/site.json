@@ -84,6 +84,14 @@
  ],
  "components": [
   {
+   "name": "Accent",
+   "group": "Controls",
+   "height": 380,
+   "preview": "project/components/Accent/preview.html",
+   "readme": "project/components/Accent/README.md",
+   "summary": "Choose an accent for the current theme without losing readable text."
+  },
+  {
    "name": "Button",
    "group": "Controls",
    "height": 190,
