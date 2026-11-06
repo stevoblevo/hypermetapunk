@@ -48,5 +48,5 @@ Owner: Bleve. Last updated 3 Nov 2026 by Claude (session 01ApCRaiX6JVCSowgVuAsG4
 
 | ID | Task | Acceptance | Who | Status |
 | --- | --- | --- | --- | --- |
-| P1 | 0.1.1: keep WORK readable where Chrome crosses the high-contrast sun | Exact Chrome preview at phone and desktop sizes; no lost glyphs; other themes unchanged | Sae(lion) | doing on sae/0.1.1-work-legibility |
-| P2 | 0.1.2: configurable accent colours | Accessible text pairing, theme changes, persistence, reset and existing API compatibility | Sae(lion) | queued separately |
+| P1 | 0.1.1: keep WORK readable where Chrome crosses the high-contrast sun | Exact Chrome preview at phone and desktop sizes; no lost glyphs; other themes unchanged | Sae(lion) | done: 5671e15; sandboxed browser gate 42294663780 and screenshots checked |
+| P2 | 0.1.2: configurable accent colours | Accessible text pairing, theme changes, persistence, reset and existing API compatibility | Sae(lion) | done: 03f7145; 1,560 colour/theme cases and sandboxed browser gate 42295292979 |

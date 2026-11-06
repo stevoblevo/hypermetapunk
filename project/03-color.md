@@ -12,7 +12,7 @@ Three themes over one set of names. The names follow the family contract, so cod
 
 ## Contrast, measured
 
-Every text pair in every theme is 4.5:1 or better. `tools/contrast.py` measures them from `tokens.json` and fails if one drops; this table is its output for 0.1.
+The standard token text pairs in every theme are 4.5:1 or better. Layered artwork must also be checked visually; token ratios alone do not prove legibility. `tools/contrast.py` measures them from `tokens.json` and fails if one drops; this table is its output for 0.1.
 
 | Theme | Text | On | Ratio |
 | --- | --- | --- | --- |
@@ -87,3 +87,7 @@ Every text pair in every theme is 4.5:1 or better. `tools/contrast.py` measures 
 | contrast | `punk-ink` | `punk-paper` | 21.0:1 |
 
 Kit v0 printed white text on orange and magenta stickers (3.1:1 and 3.6:1). In 0.1 text on any sticker is `punk-ink`.
+
+## Custom accents in 0.1.2
+
+`Hypermetapunk.accent.set('#e8ff00')` sets an accent per theme and chooses matching `on-accent` text. It adjusts unreadable requests to at least 4.5:1 on `void`, `surface` and `surface-raised`, or 13:1 in High contrast. Controls show the effective colour when it differs from the request. Reset restores that theme’s original; paper-card inks and decorative wave colours are unchanged. High contrast retains monochrome button styling; stamps and other accent-token text take the custom colour. See the Accent component for the complete API.
