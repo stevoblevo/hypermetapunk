@@ -50,3 +50,7 @@ See [CHANGELOG.md](CHANGELOG.md). A GitHub Pages deployment is not a browser-tes
 ## Custom accents (0.1.2)
 
 Use the controls under “Three themes, one page”, or call `Hypermetapunk.accent.set('#e8ff00')`. Choices are separate per theme; unreadable colours are adjusted and disclosed. `Hypermetapunk.accent.reset()` restores the original. See [Accent](project/components/Accent/README.md) for the API.
+
+## Shared experimental work
+
+See the [Claude continuity handoff](docs/claude-handoff.md) and [isolated material experiment](experiments/materials/README.md). The released 0.1.3 runtime is unchanged.
