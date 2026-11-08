@@ -1,0 +1,292 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  font:
+    16px/1.55 system-ui,
+    sans-serif;
+}
+main {
+  max-width: 1400px;
+  margin: auto;
+  padding: 32px 48px 24px;
+}
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  padding: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  z-index: 5;
+}
+.skip:focus {
+  top: 12px;
+}
+a {
+  color: var(--link);
+}
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+header {
+  position: relative;
+  padding: 6px 0 30px;
+  max-width: 900px;
+}
+.signature {
+  font: 13px/1.2 monospace;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.edition {
+  font: 11px/1.5 monospace;
+  letter-spacing: 0.1em;
+  margin: 34px 0 10px;
+  color: var(--ink-muted);
+}
+h1 {
+  font:
+    500 clamp(36px, 5.5vw, 72px) / 1.01 Georgia,
+    serif;
+  letter-spacing: -0.045em;
+  margin: 0;
+}
+.intro {
+  max-width: 540px;
+  margin: 22px 0 0;
+  color: var(--ink-muted);
+}
+figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280/660;
+  touch-action: pan-y;
+}
+canvas.paint-on {
+  touch-action: none;
+  cursor: crosshair;
+}
+figcaption {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+figcaption span {
+  color: var(--ink-muted);
+}
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 22px;
+  padding: 25px 0;
+}
+.controls label {
+  display: grid;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 600;
+  position: relative;
+}
+select,
+button {
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  min-height: 44px;
+  padding: 10px 12px;
+  width: 100%;
+}
+select {
+  font-size: 14px;
+}
+button {
+  cursor: pointer;
+  width: auto;
+  font-size: 13px;
+}
+button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+input[type="range"] {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+output {
+  position: absolute;
+  right: 0;
+  font-weight: 400;
+  color: var(--ink-muted);
+}
+.actions {
+  grid-column: 1/-1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+#status {
+  grid-column: 1/-1;
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin: -8px 0 0;
+}
+.notes {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  padding: 30px 0;
+}
+h2 {
+  font:
+    500 22px/1.2 Georgia,
+    serif;
+  margin: 0 0 12px;
+}
+.notes p {
+  font-size: 14px;
+  color: var(--ink-muted);
+  margin: 0;
+}
+footer {
+  font-size: 11px;
+  color: var(--ink-muted);
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+footer a {
+  margin-left: 8px;
+}
+@media (max-width: 760px) {
+  main {
+    padding: 22px 20px;
+  }
+  header {
+    padding-bottom: 24px;
+  }
+  .edition {
+    margin-top: 26px;
+  }
+  .controls {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .notes {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  figcaption {
+    display: grid;
+    font-size: 12px;
+  }
+  canvas {
+    aspect-ratio: 1/1.05;
+  }
+  .actions button {
+    flex: 1 1 42%;
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+}
+@media print {
+  .controls,
+  .skip {
+    display: none;
+  }
+  body {
+    background: white;
+    color: black;
+  }
+  main {
+    padding: 0;
+  }
+  .notes {
+    display: block;
+  }
+  .notes article {
+    margin-bottom: 15px;
+  }
+  figure {
+    break-inside: avoid;
+  }
+}
+
+/* plan R2: measured before and after full study inversion. The wrapper owns
+   its background so viewport propagation cannot leave it uninverted. */
+body {
+  background: #101419;
+}
+#palette-viewport {
+  --void: #141a20;
+  --surface: #202831;
+  --surface-raised: #2c343e;
+  --ink: #f7f5ee;
+  --ink-muted: #c6c9c7;
+  --link: #acdbe8;
+  --accent: #e8ec88;
+  --on-accent: #172028;
+  --line: #8c969d;
+  --focus: #ffe9ad;
+  min-height: 100vh;
+  background: var(--void);
+  color: var(--ink);
+}
+#palette-viewport.inverted {
+  filter: invert(1);
+}
+.controls {
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 760px) {
+  .controls {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (forced-colors: active) {
+  #palette-viewport.inverted {
+    filter: none;
+  }
+}
+
+/* plan R3 / review P3: print wins over the later screen palette and inversion. */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  #palette-viewport,
+  #palette-viewport.inverted {
+    filter: none;
+    background: white;
+    color: black;
+    min-height: 0;
+    --void: #ffffff;
+    --surface: #ffffff;
+    --surface-raised: #ffffff;
+    --ink: #000000;
+    --ink-muted: #333333;
+    --link: #000000;
+    --line: #444444;
+  }
+}

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" data-theme="raeverfaelt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hypermetphunk · Surface and Sub-T</title>
+    <link rel="stylesheet" href="project/tokens.css" />
+    <link rel="stylesheet" href="site/atelier.css" />
+  </head>
+  <body>
+    <div id="palette-viewport">
+      <a class="skip" href="#controls">Skip to controls</a>
+      <main>
+        <header>
+          <a class="signature" href="../../index.html">Sae / .anewgam</a>
+          <p class="edition">HYPERMETPHUNK · PRIVATE REVAMP 0.2.0-R2</p>
+          <h1>Above the light.<br />Below the tide.</h1>
+          <p class="intro">
+            Eight worlds with a life below the surface. Rub the felt, enter the
+            pressure archive, and turn every color inside out.
+          </p>
+
+</header>
+        <figure>
+          <canvas
+            id="scene"
+            width="1280"
+            height="660"
+            role="img"
+            aria-label="A traveller follows a pale road toward a workshop. The view can descend into a material-specific undersea grotto."
+          ></canvas>
+          <figcaption>
+            <b id="family-name">RaeverFaelt</b
+            ><span id="family-line"
+              >Directional felt, crimson river, soft threshold.</span
+            >
+          </figcaption>
+        </figure>
+        <section id="controls" class="controls" aria-label="Material controls">
+          <label for="look">World material<select id="look"></select></label>
+          <label for="layer"
+            >Depth view<select id="layer">
+              <option value="surface">Surface / the light</option>
+              <option value="subterrain">Sub-T / undersea</option>
+            </select></label
+          >
+          <label for="sky"
+            >Surface sky<select id="sky">
+              <option value="">Follow world</option>
+            </select></label
+          >
+          <label for="detail"
+            >Detail <output id="detail-value" for="detail">60%</output
+            ><input type="range" id="detail" min="0" max="100" value="60"
+          /></label>
+          <label for="rain"
+            >Rain pigment <output id="rain-value" for="rain">40%</output
+            ><input type="range" id="rain" min="0" max="100" value="40"
+          /></label>
+          <label for="nap"
+            >Felt nap <output id="nap-value" for="nap">With pile</output
+            ><input type="range" id="nap" min="-100" max="100" value="100"
+          /></label>
+          <div class="actions">
+            <button id="inversion" aria-pressed="false">
+              Invert all colors: off</button
+            ><button id="brush" aria-pressed="false">Rub felt: off</button
+            ><button id="reverse-nap">Reverse the felt pile</button
+            ><button id="shower">Let a shower settle</button
+            ><button id="paint" aria-pressed="false">Paint by touch: off</button
+            ><button id="dab">Place one pigment dab</button
+            ><button id="reset">Reset this view</button>
+          </div>
+          <p id="status" role="status" aria-live="polite">
+            Still by default. Painting and felt rubbing are opt-in; study
+            settings last only for this visit.
+          </p>
+        </section>
+        <section class="notes">
+          <article>
+            <h2>Retain the whole family.</h2>
+            <p>
+              Dusk, Zine and High contrast stay alongside wet print, future-tech
+              Schism, living brass, directional felt and polished berry lacquer.
+              Every family has its own underground construction.
+            </p>
+          </article>
+          <article>
+            <h2>The negative is part of the art.</h2>
+            <p>
+              Invert all colors applies a full color complement to the study,
+              including its controls. Schism, felt and lacquer keep their
+              material cues in both directions. This is a private Canvas study,
+              not a released game mode.
+            </p>
+          </article>
+          <article>
+            <h2>Room for the eye.</h2>
+            <p>
+              The surface route and undersea guide cable keep a quiet focal
+              path. Brush RaeverFaelt right to lay down the pile, or left to rub
+              it the other way. Reverse the pile is the keyboard alternative.
+            </p>
+          </article>
+        </section>
+        <footer>
+          Eight families · two strata · actual color inversion. No audio, camera
+          or game-save changes. Fictional newspaper fragments are worldbuilding,
+          not news claims.
+          <a href="project/components/Pen/README.md">API and limits</a>
+        </footer>
+      </main>
+    </div>
+    <script src="project/components/bundle.js"></script>
+    <script src="project/components/materials.js"></script>
+    <script src="project/components/worlds.js"></script>
+    <script src="site/atelier.js"></script>
+  </body>
+</html>

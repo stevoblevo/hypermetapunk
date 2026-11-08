@@ -1,0 +1,23 @@
+name: Material experiment checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  material-experiment:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --ignore-scripts @napi-rs/canvas@0.1.100 typescript@5.9.3
+      - name: Check isolated experimental source
+        working-directory: experiments/materials
+        run: |
+          node --max-old-space-size=96 tools/worlds.test.cjs
+          node tools/accent-test.mjs
+          python3 -I tools/contrast.py
+          node --check project/components/landmarks.js
+          npx --no-install tsc --noEmit --lib es2020,dom project/components/index.d.ts

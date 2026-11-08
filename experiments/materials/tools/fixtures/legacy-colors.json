@@ -1,0 +1,182 @@
+{
+  "void": {
+    "dusk": "#0b0618",
+    "zine": "#f4efe3",
+    "contrast": "#000000"
+  },
+  "paper": {
+    "dusk": "#0b0618",
+    "zine": "#f4efe3",
+    "contrast": "#000000"
+  },
+  "surface": {
+    "dusk": "#160d2e",
+    "zine": "#e9e2cf",
+    "contrast": "#0b0b0b"
+  },
+  "surface-raised": {
+    "dusk": "#211543",
+    "zine": "#fffdf6",
+    "contrast": "#141414"
+  },
+  "page": {
+    "dusk": "#211543",
+    "zine": "#fffdf6",
+    "contrast": "#141414"
+  },
+  "line": {
+    "dusk": "#3d2c70",
+    "zine": "#c9c0a8",
+    "contrast": "#ffffff"
+  },
+  "ink": {
+    "dusk": "#f7f2ff",
+    "zine": "#0d0d12",
+    "contrast": "#ffffff"
+  },
+  "ink-muted": {
+    "dusk": "#c9bdf0",
+    "zine": "#46404d",
+    "contrast": "#e8e8e8"
+  },
+  "accent": {
+    "dusk": "#ff6fb5",
+    "zine": "#c2006a",
+    "contrast": "#e8ff00"
+  },
+  "accent-soft": {
+    "dusk": "rgba(255, 111, 181, 0.16)",
+    "zine": "rgba(194, 0, 106, 0.1)",
+    "contrast": "rgba(232, 255, 0, 0.18)"
+  },
+  "on-accent": {
+    "dusk": "#14061f",
+    "zine": "#ffffff",
+    "contrast": "#000000"
+  },
+  "cue": {
+    "dusk": "#05ffa1",
+    "zine": "#006a46",
+    "contrast": "#05ffa1"
+  },
+  "on-cue": {
+    "dusk": "#04140c",
+    "zine": "#ffffff",
+    "contrast": "#000000"
+  },
+  "link": {
+    "dusk": "#7fe9ff",
+    "zine": "#0050a8",
+    "contrast": "#7fe9ff"
+  },
+  "focus": {
+    "dusk": "#e8ff00",
+    "zine": "#ff5a00",
+    "contrast": "#e8ff00"
+  },
+  "chrome-1": {
+    "dusk": "#fdfdff",
+    "zine": "#7a7a92",
+    "contrast": "#ffffff"
+  },
+  "chrome-2": {
+    "dusk": "#c9d6ff",
+    "zine": "#34344a",
+    "contrast": "#ffffff"
+  },
+  "chrome-3": {
+    "dusk": "#7f7fd5",
+    "zine": "#0d0d12",
+    "contrast": "#e8e8e8"
+  },
+  "chrome-4": {
+    "dusk": "#ff71ce",
+    "zine": "#4a4a66",
+    "contrast": "#ffffff"
+  },
+  "chrome-5": {
+    "dusk": "#01cdfe",
+    "zine": "#0d0d12",
+    "contrast": "#e8ff00"
+  },
+  "wave-abyss": {
+    "dusk": "#06030f",
+    "zine": "#f4efe3",
+    "contrast": "#000000"
+  },
+  "wave-indigo": {
+    "dusk": "#1b0f3a",
+    "zine": "#eee2f2",
+    "contrast": "#000000"
+  },
+  "wave-violet": {
+    "dusk": "#3d1663",
+    "zine": "#f6cfe6",
+    "contrast": "#111111"
+  },
+  "wave-magenta": {
+    "dusk": "#ff2e88",
+    "zine": "#ff9bcb",
+    "contrast": "#333333"
+  },
+  "wave-tangerine": {
+    "dusk": "#ffb86b",
+    "zine": "#ffcf9e",
+    "contrast": "#777777"
+  },
+  "wave-sun": {
+    "dusk": "#fffb96",
+    "zine": "#fff3a6",
+    "contrast": "#ffffff"
+  },
+  "wave-cyan": {
+    "dusk": "#01cdfe",
+    "zine": "#01a5d4",
+    "contrast": "#ffffff"
+  },
+  "wave-mint": {
+    "dusk": "#05ffa1",
+    "zine": "#00c27a",
+    "contrast": "#ffffff"
+  },
+  "punk-acid": {
+    "dusk": "#e8ff00",
+    "zine": "#e8ff00",
+    "contrast": "#e8ff00"
+  },
+  "punk-orange": {
+    "dusk": "#ff5a00",
+    "zine": "#ff5a00",
+    "contrast": "#ffffff"
+  },
+  "punk-magenta": {
+    "dusk": "#ff00a8",
+    "zine": "#ff00a8",
+    "contrast": "#ffffff"
+  },
+  "punk-ink": {
+    "dusk": "#0d0d12",
+    "zine": "#0d0d12",
+    "contrast": "#000000"
+  },
+  "slap": {
+    "dusk": "#ff2e88",
+    "zine": "#0d0d12",
+    "contrast": "#ffffff"
+  },
+  "punk-paper": {
+    "dusk": "#f4efe3",
+    "zine": "#fffdf6",
+    "contrast": "#ffffff"
+  },
+  "punk-tape": {
+    "dusk": "rgba(255, 235, 150, 0.78)",
+    "zine": "rgba(255, 230, 140, 0.85)",
+    "contrast": "rgba(255, 255, 255, 0.9)"
+  },
+  "scrawl": {
+    "dusk": "#ff71ce",
+    "zine": "#c2006a",
+    "contrast": "#e8ff00"
+  }
+}
