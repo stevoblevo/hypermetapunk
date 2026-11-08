@@ -54,3 +54,7 @@ Use the controls under “Three themes, one page”, or call `Hypermetapunk.acce
 ## Shared experimental work
 
 See the [Claude continuity handoff](docs/claude-handoff.md) and [isolated material experiment](experiments/materials/README.md). The released 0.1.3 runtime is unchanged.
+
+## Optional game material candidate
+
+The [standalone material package](packages/materials/README.md) offers a pinned, draw-only eight-world Canvas background candidate with a host contract, declarations, integrity manifest and adoption fixture. It is experimental and separate from the released 0.1.3 UI; game-owner and browser/device acceptance are required before production adoption.

@@ -21,3 +21,22 @@ jobs:
           python3 -I tools/contrast.py
           node --check project/components/landmarks.js
           npx --no-install tsc --noEmit --lib es2020,dom project/components/index.d.ts
+      - name: Build optional pinned material package
+        run: |
+          node packages/materials/build.mjs
+          node packages/materials/test/build.test.mjs
+          git diff --exit-code -- packages/materials/v
+          node --max-old-space-size=96 packages/materials/test/host.test.mjs
+          npx --no-install tsc --noEmit --lib es2020,dom packages/materials/v/0.2.0-materials.1/index.d.ts packages/materials/test/types.ts
+      - name: Install pinned host browser driver
+        run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Browser host adoption fixture (sandbox required)
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+        run: node packages/materials/test/browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: material-host-evidence
+          path: test-results/material-host-*.png
+          if-no-files-found: warn

@@ -1,0 +1,8 @@
+{
+  "name": "@hypermetapunk/materials",
+  "version": "0.2.0-materials.1",
+  "private": true,
+  "type": "module",
+  "exports": { ".": {"types":"./v/0.2.0-materials.1/index.d.ts", "import":"./v/0.2.0-materials.1/materials.mjs"}},
+  "scripts": {"build":"node build.mjs", "test":"node test/build.test.mjs && node --max-old-space-size=96 test/host.test.mjs"}
+}

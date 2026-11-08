@@ -50,3 +50,11 @@ Owner: Bleve. Last updated 3 Nov 2026 by Claude (session 01ApCRaiX6JVCSowgVuAsG4
 | --- | --- | --- | --- | --- |
 | P1 | 0.1.1: keep WORK readable where Chrome crosses the high-contrast sun | Exact Chrome preview at phone and desktop sizes; no lost glyphs; other themes unchanged | Sae(lion) | done: 5671e15; sandboxed browser gate 42294663780 and screenshots checked |
 | P2 | 0.1.2: configurable accent colours | Accessible text pairing, theme changes, persistence, reset and existing API compatibility | Sae(lion) | done: 03f7145; 1,560 colour/theme cases and sandboxed browser gate 42295292979 |
+
+## Optional material host boundary (8 November 2026)
+
+| ID | Task | Acceptance | Who | Status |
+| --- | --- | --- | --- | --- |
+| C4a | Standalone pinned material scene candidate and host contract | Reproducible manifest, deterministic CPU contract checks, sandboxed host fixture, explicit production gates | Sae(lion) | candidate prepared in this commit; browser/device and game-owner acceptance remain open |
+
+[Optional materials package](../packages/materials/README.md) prepares game adoption without replacing 0.1.3 or completing all of C4. Production enablement remains a separate host-owned change after its acceptance gates.

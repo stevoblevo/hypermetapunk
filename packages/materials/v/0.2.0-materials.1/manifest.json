@@ -1,0 +1,9 @@
+{
+  "version": "0.2.0-materials.1",
+  "status": "experimental",
+  "renderer": "canvas-2d",
+  "files": {
+    "materials.mjs": "7c69c06cfff84fb788d0c944c469a2bdc5e1ad23e32310370931ce841165baaa",
+    "index.d.ts": "13f7a3eb8a946054890be913992e91cfc7c9c50a67303d8d34024039f2ec9579"
+  }
+}
