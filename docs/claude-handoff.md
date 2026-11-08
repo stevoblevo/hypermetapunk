@@ -53,3 +53,7 @@ A private game integration previously exercised projected materials without chan
 - [Toolkit shelf](https://saelion.co/toolkit) connects the family experiences.
 
 Coverage: current repository and branch inventory, existing toolkit source, earlier material studies and recovered user direction, plus game-owner privacy coordination. This is a substantial working continuity map, not a complete export of all Claude/ChatGPT chats or inaccessible reference artwork. Private conversations and internal research notes are not public source artifacts.
+
+## Optional host package continuation (8 November)
+
+The [0.2.0-materials.1 standalone candidate](../packages/materials/README.md) now extracts the shared material/world renderers into an isolated ESM module with pinned palettes, declarations and SHA-256 manifest. It uses one bounded private Canvas surface per renderer, preserves destination paths/state, and exposes only static background rendering. No experimental UI tokens or globals are needed alongside 0.1.3. The public host fixture and CI gate test appearance switching without simulation changes. Projected landmarks, full family pen API, actual RF/Hush or Signal Orchard adapters, physical-device/visual acceptance and production enablement are still separate work. Follow the package's explicit cache, DPR, fallback and adoption contract; do not treat a candidate as an accepted game integration.
