@@ -50,6 +50,7 @@ Owner: Bleve. Last updated 3 Nov 2026 by Claude (session 01ApCRaiX6JVCSowgVuAsG4
 | --- | --- | --- | --- | --- |
 | P1 | 0.1.1: keep WORK readable where Chrome crosses the high-contrast sun | Exact Chrome preview at phone and desktop sizes; no lost glyphs; other themes unchanged | Sae(lion) | done: 5671e15; sandboxed browser gate 42294663780 and screenshots checked |
 | P2 | 0.1.2: configurable accent colours | Accessible text pairing, theme changes, persistence, reset and existing API compatibility | Sae(lion) | done: 03f7145; 1,560 colour/theme cases and sandboxed browser gate 42295292979 |
+| P3 | 0.2.0: the punk-damage pass — printed, not rendered; slaps cross the art, never the words | Front page in Dusk and Zine at desktop and phone widths: headline whole, bands, grain and tape read as cheap print; contrast check passes | Sae | done |
 
 ## Optional material host boundary (8 November 2026)
 

@@ -5,7 +5,7 @@
 [data-theme] {
   --hmp-display: var(--font-display);
   --hmp-ui: var(--font-sans);
-  --hmp-grain-op: var(--op-grain, 0.16);
+  --hmp-grain-op: var(--op-grain, 0.24);
   --hmp-glow: var(--shadow-glow);
   --hmp-slap: 4px 4px 0 var(--slap);
   --hmp-band: linear-gradient(180deg, var(--wave-abyss) 0%, var(--wave-indigo) 34%, var(--wave-violet) 52%, var(--wave-magenta) 72%, var(--wave-tangerine) 90%, var(--wave-sun) 108%);
