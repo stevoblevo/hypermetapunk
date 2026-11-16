@@ -1,11 +1,11 @@
-/* Hypermetapunk 0.1.3 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
+/* Hypermetapunk 0.2.0 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
    window.Hypermetapunk: theme, still (motion off), ticker, slap, taste, token, reducedMotion, init.
    Parents: Storeybrook × Depthfield. Family tasks H2 and H3 (stevoblevo/depthfield, docs/family.md).
    Everything degrades: with JS off the markup reads in order, stickers sit where they were put and tickers wrap. */
 (function (w, d) {
   'use strict';
   if (w.Hypermetapunk && w.Hypermetapunk.version) return;
-  var VERSION = '0.1.3';
+  var VERSION = '0.2.0';
   var THEMES = [
     { id: 'dusk', name: 'Dusk', light: false, motion: true, print: false, line: 'Neon at the horizon, chrome over violet' },
     { id: 'zine', name: 'Zine', light: true, motion: true, print: true, line: 'Photocopied in daylight, stapled, stickered' },
@@ -181,7 +181,7 @@
       var a = s.getBoundingClientRect();
       texts.forEach(function (t) { if (t.contains(s) || s.contains(t)) return; var b = t.getBoundingClientRect(); var ix = Math.min(a.right, b.right) - Math.max(a.left, b.left), iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top); if (ix > 12 && iy > 8) { over++; overS = overS || (s.textContent || 'tape').trim(); } });
     });
-    if (over) add('slap-over-words', 'warn', over, overS, 'Stickers and tape go on the frame, never over the words. Move it to a corner or the margin.');
+    if (over) add('slap-over-words', 'warn', over, overS, 'Slap the frame — and cross the art, never the words. Stickers and tape may cross the sun, the grid or a picture; move this one off the text, to a corner or the margin.');
     var opaque = function (c) { return !/rgba\([^)]*,\s*0(\.0+)?\)$/.test(c) && c !== 'transparent'; };
     var badInk = $$('.hmp-sticker, .hmp-btn', scope).filter(function (s) { var cs = getComputedStyle(s), c = rgb(cs.color), b = rgb(cs.backgroundColor); return vis(s) && opaque(cs.backgroundColor) && c && b && ratio(c, b) < 4.5; });
     if (badInk.length) add('slap-contrast', 'warn', badInk.length, badInk[0].textContent.trim(), 'Text on a sticker or a filled button is photocopy black (punk-ink) or the theme\'s on-accent. Under 4.5:1 it is not read.');

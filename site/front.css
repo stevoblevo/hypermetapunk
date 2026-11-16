@@ -23,7 +23,7 @@ body { overflow-x: clip; }
 
 /* the horizon */
 .fr-hero { min-height: min(86vh, 860px); display: grid; grid-template-columns: minmax(0, 1fr); align-items: end; padding: var(--space-9) 0 calc(var(--space-9) + 4vh); }
-.fr-hero h1 { font-size: clamp(30px, 8.2vw, 120px); }   /* one long word: sized to fit the column at every width */
+.fr-hero h1 { font-size: clamp(28px, 7.4vw, 104px); }   /* plan P3: one long word, whole at every width — the K clipped at 1919px in Dusk and Zine */
 .fr-hero .fr-sun { --sun: clamp(220px, 34vw, 420px); }
 .fr-kicker { color: inherit; opacity: 0.9; margin-bottom: var(--space-3); }
 .fr-lede { margin: var(--space-4) 0 var(--space-5); color: inherit; }
@@ -48,6 +48,8 @@ body { overflow-x: clip; }
 .fr-face h3 { margin: var(--space-2) 0; }
 .fr-face p { margin: 0 0 var(--space-3); color: var(--ink-muted); }
 .fr-face .fr-row { color: var(--ink); }
+/* plan P3: in the trio, the lead theme's sun sits on an ink offset plate */
+.fr-face[data-theme="zine"] .hmp-sun { box-shadow: 7px 7px 0 var(--punk-ink); }
 
 .fr-from { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-6); align-items: center; }
 .fr-from .hmp-card p { max-width: var(--size-measure); }

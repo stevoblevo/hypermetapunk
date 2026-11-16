@@ -1,5 +1,5 @@
 {
-  "latest": "0.1.3",
+  "latest": "0.2.0",
   "versions": {
     "0.1.0": {
       "tokens.css": "3e3cedcd2934458657c4dfd81b23ff513ef90c1425b9e0bc0a16b74ae2c3e58b",
@@ -24,6 +24,12 @@
       "bundle.css": "aab326754cc3f16c4ec2b0a1bd9697045c9d1474473eb2010b2e7074ed7b76c4",
       "bundle.js": "cfb90d94c73ed1f050b362ddd39a4cde3299bd1a5b94bbc72634c0ea93101434",
       "index.d.ts": "6d2b2366d2ee8c293d6d56c14a5dc0e7e996ec22d7d59d60cc1846c6b21e9e29"
+    },
+    "0.2.0": {
+      "tokens.css": "bdee21967922ae7880bb08c0abe13317570f2685fa848e10f50c5826d03bc1a2",
+      "bundle.css": "27dcaafdc5f88ba3e4ef4da4f73c270827bc2316ff162c2757dec191b88a3053",
+      "bundle.js": "af00d8ed7f862ea6f99ac9abb84f21d27d25283f5329d3f87bacf34983975ac7",
+      "index.d.ts": "d3b191185d3a9a6dfef4db835d89c2a7a4b10d6cfad6031deb5030506f4d6fc3"
     }
   }
 }

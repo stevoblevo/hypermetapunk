@@ -4,7 +4,7 @@ Hypermetapunk is the third design system in Bleve's family, the child of Storeyb
 
 It began as a block of CSS at the top of one page, "Hypermetapunk Kit v0", written for bespoke.gig on 1 November 2026 (in `storeybrook/show-tell/bespoke/`). Version 0.1 lifts that seed into the family's format: tokens with themes, components with guidelines and live previews, a behaviour bundle, and this book.
 
-Current runtime: **0.1.3**. The 0.1.1 Chrome keyline keeps lettering readable over the High contrast sun; 0.1.2 adds [custom accents](components/Accent/README.md). Original runtime versions remain available under `v/`.
+Current runtime: **0.2.0**. 0.2.0 is the punk-damage pass: the wave is printed, not rendered — hard toner bands, heavier grain, slipped plates, a taped sun, a torn grid — and slaps may now cross the artwork, never the words. The 0.1.1 Chrome keyline keeps lettering readable over the High contrast sun; 0.1.2 adds [custom accents](components/Accent/README.md). Original runtime versions remain available under `v/`.
 
 ## When to use it
 
@@ -21,7 +21,7 @@ A theme changes materials, never content, order or meaning.
 ## The rules that make it Hypermetapunk
 
 1. **One horizon.** The dusk band, the sun and the grid floor open the page and, at most, close it. Everything else sits on the void.
-2. **Slap the frame, not the words.** Stickers, tape and stamps go on corners, bars and margins. Running text is never covered and never turned.
+2. **Slap the frame — and cross the art, never the words.** Stickers, tape and stamps go on corners, bars and margins, and may cross the artwork: the sun, the grid, the gradient, a picture. Running text is never covered and never turned.
 3. **One loud thing per region.** One chrome line, one acid button, one sticker that matters. Everything else is plain.
 4. **People talk in the margins.** Scrawl is a named person's aside, never the brand's slogan.
 5. **Plain-spoken.** Say what a thing does, by its name. Punk does not do "seamless".

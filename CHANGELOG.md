@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0
+
+- The punk-damage pass: the wave is printed, not rendered. The horizon gradient steps down in hard toner bands; grain rises (0.24, and 0.28 on Zine); chrome type carries a permanent slipped magenta plate; the sun wears a strip of tape across its face; the grid floor has a torn hole (the void in Dusk, paper in Zine, none in High contrast).
+- New slaps: `hmp-tape--cross`, one long strip across the artwork, and `hmp-sticker--peeled`, a sticker with a lifted corner. Every tape strip's ends are torn.
+- Doctrine revised: slaps slap the frame — and cross the art, never the words. Stickers and tape may cross the sun, the grid, the gradient or a picture; running text is still never covered or turned, and `taste()` still flags slaps over words only.
+- Zine leads the front page: its card stands first in the theme trio, tagged "the lead", with the heaviest grain.
+- Fixes the front-page hero headline clipping its final K at wide viewports in Dusk and Zine: the hero measure and the display-xl cap are tightened.
+- All published 0.1.0, 0.1.1, 0.1.2 and 0.1.3 runtime files remain unchanged.
+
 ## 0.1.3
 
 - Paper cards now scope `on-accent` and `on-cue` with their local fill colours. Accent buttons nested inside a card no longer inherit an incompatible outer-theme ink.
