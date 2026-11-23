@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Fail when the pen's ink table in bundle.js no longer matches project/tokens.json."""
+"""Fail when the pen's ink table in pen.js no longer matches project/tokens.json."""
 import json, re
 from pathlib import Path
 r = Path(__file__).resolve().parents[1]
 tokens = json.loads((r/'project/tokens.json').read_text())['color']['tokens']
-js = (r/'project/components/bundle.js').read_text()
+js = (r/'project/components/pen.js').read_text()
 block = re.search(r"var INKS = \{\n(.*?)\n  \};", js, re.S).group(1)
 bad = 0
 for theme in ('dusk', 'zine', 'contrast'):

@@ -22,7 +22,9 @@ interface Hypermetapunk {
   version: string;
   themes: HmpLook[];
   looks: HmpLook[];
-  pen(look?: HmpThemeId | Element, opts?: { still?: boolean }): HmpPen;
+  /** from the add-on components/pen.js (0.3.0), which also works without bundle.js */
+  pen?(look?: HmpThemeId | Element, opts?: { still?: boolean }): HmpPen;
+  penVersion?: string;
   init(): Hypermetapunk;
   theme: { list: HmpLook[]; get(): HmpThemeId; set(id: HmpThemeId, opts?: { keep?: boolean }): HmpThemeId; init(): void };
   accent: { presets(): { name: string; color: string }[]; get(): HmpAccent | null; set(color: string, opts?: { keep?: boolean }): HmpAccent | null; reset(opts?: { keep?: boolean }): null };
