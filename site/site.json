@@ -156,6 +156,14 @@
    "summary": "A neon grid floor that runs toward you under the dusk band; together with the Sun it makes the Horizon, the system's one scene."
   },
   {
+   "name": "Pen",
+   "group": "Horizon",
+   "height": 360,
+   "preview": "project/components/Pen/preview.html",
+   "readme": "project/components/Pen/README.md",
+   "summary": "A theme's inks and its horizon for canvas: `Hypermetapunk.pen(theme)` resolves the theme's colours to RGB and draws the dusk band, the banded sun, the grid floor, chrome lettering and misregistered type, so a game drawn on canvas looks like the page around it."
+  },
+  {
    "name": "Sun",
    "group": "Horizon",
    "height": 260,

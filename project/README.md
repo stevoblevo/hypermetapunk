@@ -4,7 +4,7 @@ Hypermetapunk is the third design system in Bleve's family, the child of Storeyb
 
 It began as a block of CSS at the top of one page, "Hypermetapunk Kit v0", written for bespoke.gig on 1 November 2026 (in `storeybrook/show-tell/bespoke/`). Version 0.1 lifts that seed into the family's format: tokens with themes, components with guidelines and live previews, a behaviour bundle, and this book.
 
-Current runtime: **0.2.0**. 0.2.0 is the punk-damage pass: the wave is printed, not rendered — hard toner bands, heavier grain, slipped plates, a taped sun, a torn grid — and slaps may now cross the artwork, never the words. The 0.1.1 Chrome keyline keeps lettering readable over the High contrast sun; 0.1.2 adds [custom accents](components/Accent/README.md). Original runtime versions remain available under `v/`.
+Current runtime: **0.3.0**. 0.3.0 adds the pen (`Hypermetapunk.pen(theme)`: the horizon, chrome lettering and print materials on canvas, for games). 0.2.0 was the punk-damage pass: the wave is printed, not rendered — hard toner bands, heavier grain, slipped plates, a taped sun, a torn grid — and slaps may now cross the artwork, never the words. The 0.1.1 Chrome keyline keeps lettering readable over the High contrast sun; 0.1.2 adds [custom accents](components/Accent/README.md). Original runtime versions remain available under `v/`.
 
 ## When to use it
 

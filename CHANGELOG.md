@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0
+
+- The pen (plan C4, family F4): `Hypermetapunk.pen(theme)` resolves a theme's inks to RGB and draws the horizon on canvas: `sky` (the dusk gradient in hard toner bands), `sun` (the banded disc with its tape), `floor` (the grid, drifting unless motion is held), `horizon` (all three), `chrome` and `misreg` lettering, and the print materials `scan`, `halftone` and `xerox` with `grain`. It needs no page CSS, so a single-file game can load `bundle.js` alone.
+- `Hypermetapunk.looks` already listed the three themes as data; the pen completes this system's half of the family's "looks as data and a pen".
+- New component page: Pen, drawn live in all three themes. New check: `tools/pen-inks.py` fails when the pen's inks drift from `tokens.json`.
+- First host: AND SO 10's Dusk look (`stevoblevo.github.io/_src/and-so`).
+- All published 0.1.x and 0.2.0 runtime files remain unchanged.
+
 ## 0.2.0
 
 - The punk-damage pass: the wave is printed, not rendered. The horizon gradient steps down in hard toner bands; grain rises (0.24, and 0.28 on Zine); chrome type carries a permanent slipped magenta plate; the sun wears a strip of tape across its face; the grid floor has a torn hole (the void in Dusk, paper in Zine, none in High contrast).

@@ -9,6 +9,7 @@ Read these first: `docs/plan.md` (this system's tasks, in a suggested order), `d
 ```
 python3 -I site/build.py
 python3 -I tools/contrast.py
+python3 -I tools/pen-inks.py           # the pen's inks still match tokens.json
 node tools/check.mjs                  # front page and docs, three themes, desktop and phone (needs Playwright)
 python3 -m http.server 8703
 ```
