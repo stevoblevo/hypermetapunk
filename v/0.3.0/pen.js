@@ -39,12 +39,13 @@
       for (var i = 1; i < BAND.length; i++) if (k <= BAND[i][1]) return mix(ink(BAND[i - 1][0]), ink(BAND[i][0]), (k - BAND[i - 1][1]) / (BAND[i][1] - BAND[i - 1][1]));
       return ink('wave-sun');
     }
-    /* the sky: the gradient stepped down in hard toner bands, with the printer's lines across it. Its bottom edge is the horizon. */
+    /* the sky: the gradient stepped down in hard toner bands, with the printer's lines across it. Its bottom edge is the horizon.
+       `ease` above 1 holds the dark longer and keeps the hot bands close to the horizon, for a sky with words over it. */
     function sky(ctx, o) {
-      var x = o.x || 0, y = o.y || 0, n = Math.max(2, o.steps || 14), span = o.span == null ? 0.9 : o.span, i, y0, y1;
+      var x = o.x || 0, y = o.y || 0, n = Math.max(2, o.steps || 14), span = o.span == null ? 0.9 : o.span, ease = o.ease > 0 ? o.ease : 1, i, y0, y1;
       ctx.save();
       if (id === 'contrast') { ctx.fillStyle = rgb('void'); ctx.fillRect(x, y, o.w, o.h); ctx.restore(); return; }
-      for (i = 0; i < n; i++) { y0 = Math.floor(y + (o.h * i) / n); y1 = Math.ceil(y + (o.h * (i + 1)) / n); ctx.fillStyle = rgb(band(((i + 0.5) / n) * span)); ctx.fillRect(x, y0, o.w, y1 - y0); }
+      for (i = 0; i < n; i++) { y0 = Math.floor(y + (o.h * i) / n); y1 = Math.ceil(y + (o.h * (i + 1)) / n); ctx.fillStyle = rgb(band(Math.pow((i + 0.5) / n, ease) * span)); ctx.fillRect(x, y0, o.w, y1 - y0); }
       if (o.lines !== false) { ctx.fillStyle = 'rgba(0,0,0,0.115)'; for (i = y; i < y + o.h; i += 5) ctx.fillRect(x, i, o.w, 2); }
       ctx.restore();
     }

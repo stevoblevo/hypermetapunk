@@ -2,7 +2,7 @@
 
 ## 0.3.0
 
-- The pen (plan C4, family F4), an add-on at `components/pen.js` that loads after `bundle.js` or alone: `Hypermetapunk.pen(theme)` resolves a theme's inks to RGB and draws the horizon on canvas: `sky` (the dusk gradient in hard toner bands), `sun` (the banded disc with its tape), `floor` (the grid, drifting unless motion is held), `horizon` (all three), `chrome` and `misreg` lettering, and the print materials `scan`, `halftone` and `xerox` with `grain`. It reads no CSS, so a single-file game can load `pen.js` by itself.
+- The pen (plan C4, family F4), an add-on at `components/pen.js` that loads after `bundle.js` or alone: `Hypermetapunk.pen(theme)` resolves a theme's inks to RGB and draws the horizon on canvas: `sky` (the dusk gradient in hard toner bands; `ease` keeps the hot bands by the horizon when words sit over the sky), `sun` (the banded disc with its tape), `floor` (the grid, drifting unless motion is held), `horizon` (all three), `chrome` and `misreg` lettering, and the print materials `scan`, `halftone` and `xerox` with `grain`. It reads no CSS, so a single-file game can load `pen.js` by itself.
 - `Hypermetapunk.looks` already listed the three themes as data; the pen completes this system's half of the family's "looks as data and a pen".
 - New component page: Pen, drawn live in all three themes. New check: `tools/pen-inks.py` fails when the pen's inks drift from `tokens.json`.
 - First host: AND SO 10's Dusk look (`stevoblevo.github.io/_src/and-so`).

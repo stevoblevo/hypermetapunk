@@ -8,7 +8,7 @@ interface HmpPen {
   inks: Record<string, HmpInk>;
   rgb(name: string | HmpInk, alpha?: number): string;
   band(k: number): HmpInk;
-  sky(ctx: CanvasRenderingContext2D, o: { x?: number; y?: number; w: number; h: number; steps?: number; span?: number; lines?: boolean }): void;
+  sky(ctx: CanvasRenderingContext2D, o: { x?: number; y?: number; w: number; h: number; steps?: number; span?: number; ease?: number; lines?: boolean }): void;
   sun(ctx: CanvasRenderingContext2D, o: { x: number; y: number; r: number; tape?: boolean; glow?: boolean }): void;
   floor(ctx: CanvasRenderingContext2D, o: { x?: number; y: number; w: number; h: number; vx?: number; t?: number; rows?: number; gap?: number; spread?: number; line?: number }): void;
   horizon(ctx: CanvasRenderingContext2D, o: { x?: number; y?: number; w: number; h: number; at?: number; sunR?: number; sunX?: number; t?: number; steps?: number; lines?: boolean; tape?: boolean }): number;
