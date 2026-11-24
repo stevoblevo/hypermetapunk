@@ -158,7 +158,7 @@
   {
    "name": "Pen",
    "group": "Horizon",
-   "height": 360,
+   "height": 590,
    "preview": "project/components/Pen/preview.html",
    "readme": "project/components/Pen/README.md",
    "summary": "A theme's inks and its horizon for canvas: `Hypermetapunk.pen(theme)` resolves the theme's colours to RGB and draws the dusk band, the banded sun, the grid floor, chrome lettering and misregistered type, so a game drawn on canvas looks like the page around it."
@@ -170,6 +170,14 @@
    "preview": "project/components/Sun/preview.html",
    "readme": "project/components/Sun/README.md",
    "summary": "The banded disc at the horizon: acid light at the top, tangerine, then magenta, cut by bars that thin toward the bottom."
+  },
+  {
+   "name": "Pets",
+   "group": "Punk",
+   "height": 660,
+   "preview": "project/components/Pets/preview.html",
+   "readme": "project/components/Pets/README.md",
+   "summary": "Five dusk pets, the family's third set of crossing pets, found by doing what the kit is for and kept in the save Storeybrook's day pets and Depthfield's night pets already share: `Hypermetapunk.pets` records them and draws them on canvas, dancing to a beat with a swing."
   },
   {
    "name": "Scrawl",

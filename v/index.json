@@ -1,5 +1,5 @@
 {
-  "latest": "0.3.0",
+  "latest": "0.4.0",
   "versions": {
     "0.1.0": {
       "tokens.css": "3e3cedcd2934458657c4dfd81b23ff513ef90c1425b9e0bc0a16b74ae2c3e58b",
@@ -37,6 +37,14 @@
       "bundle.js": "bc0048b3a8f0ac503eb8d61e9a77c9c4ec2f6c7d31cea0488475abca4fa34e7c",
       "index.d.ts": "9832868b6fb75ef1bd28af0bb2c6bf6670d2137da8ad69698c2ff09002994323",
       "pen.js": "9579ef2aea53ae9e7e4850f126b874b0972b587f03d920787781f0839e475c4d"
+    },
+    "0.4.0": {
+      "tokens.css": "bdee21967922ae7880bb08c0abe13317570f2685fa848e10f50c5826d03bc1a2",
+      "bundle.css": "0823699d41779a9a95ae4071525c440462985b6d451ccb72e9e87465066182f6",
+      "bundle.js": "b3dbe36101a36d4c9eee8c98918d4b089df6778361049f94ef570c9d9bffe4f9",
+      "index.d.ts": "28326fc35b9e7179cfb2ec2e481bca6de79d174a84e91900df35eb2aad3b8bf3",
+      "pen.js": "de4a19c890de95182127cc4068dba42bc104a7f7c0fe806550fc208674b183b8",
+      "pets.js": "4129134fe5bb0552fb5a31613bfb64f5239c538ae35bc31d48bb21c2cc46216d"
     }
   }
 }

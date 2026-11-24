@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.0
+
+- Crossing pets, the third set (plan C5): the add-on `components/pets.js` gives `Hypermetapunk.pets` (`kit`, `key`, `version`, `list`, `has`, `find`, `count`, `total`, `draw`), the same contract Storeybrook and Depthfield keep. Five dusk pets join the family's shared save, `localStorage['crossing:pets']`, as `hmp:` keys; every write reads the save first and adds one key, so the day (`sb:`) and night (`df:`) pets are never touched. `total()` counts the family from the same save (7 + 5 + 5 = 17).
+- The five, drawn on canvas in the kit's materials and dancing to a beat with a swing (the weight a little behind the beat, a lighter hit two thirds through it): Vinyl (`sticker-cat`), a die-cut vinyl cat whose corner peels up on the beat; Snow (`static-moth`), wings of TV static with test-card eyespots and a chrome body; Offset (`two-plate-koi`), a koi printed as a cyan and a magenta plate that slip apart and snap back; Postmark (`stamp-crab`), a halftone rubber-stamp crab that sidesteps and leaves its last impression fading; Flutter (`tape-bat`), wings of cassette tape, reels for eyes. `still: true` draws one fixed pose; nothing allocates a canvas per frame.
+- The front page finds them by doing what the kit is for: peel a sticker on the parts board, stop the ticker (it now has its own stop button), hold the pointer or a finger on the misregistered heading until its plates slip, switch to Zine, open every door at the foot of the page. A find slaps on a card (Card, Tape, Sticker and Stamp, the pet drawn by `pets.draw`); the bar counts "Pets n/5"; a new Dusk pets section lists all five with Storeybrook's and Depthfield's counts, and when all seventeen are found a link appears: the lattice, in AND SO.
+- The pen draws stickers: `pen(theme).sticker(ctx, src, x, y, o)` die-cuts any canvas or image with a keyline in the theme's sticker stock, a hairline edge, a hard slap shadow and optional slipped cyan and magenta plates (none in High contrast), on offscreen canvases reused by size. The Pen page shows a drawn creature turned into a sticker in all three themes.
+- `taste()` treats a floating layer (`[data-hmp-layer]`: the sticky bar, a found card) as its own page: its slaps are measured against its own words only.
+- New component page: Pets. `tools/pen-inks.py` now checks the ink table in `pets.js` too; `tools/check.mjs` finds all five pets on the front page and checks that the family's other pets survive in the save.
+- All published 0.1.x, 0.2.0 and 0.3.0 runtime files remain unchanged.
+
 ## 0.3.0
 
 - The pen (plan C4, family F4), an add-on at `components/pen.js` that loads after `bundle.js` or alone: `Hypermetapunk.pen(theme)` resolves a theme's inks to RGB and draws the horizon on canvas: `sky` (the dusk gradient in hard toner bands; `ease` keeps the hot bands by the horizon when words sit over the sky), `sun` (the banded disc with its tape), `floor` (the grid, drifting unless motion is held), `horizon` (all three), `chrome` and `misreg` lettering, and the print materials `scan`, `halftone` and `xerox` with `grain`. It reads no CSS, so a single-file game can load `pen.js` by itself.

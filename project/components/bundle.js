@@ -1,11 +1,12 @@
-/* Hypermetapunk 0.3.0 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
-   window.Hypermetapunk: theme, still (motion off), ticker, slap, taste, token, reducedMotion, init, looks. The pen for canvas is the add-on components/pen.js.
+/* Hypermetapunk 0.4.0 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
+   window.Hypermetapunk: theme, still (motion off), ticker, slap, taste, token, reducedMotion, init, looks. Add-ons, loaded after
+   this file: the pen for canvas (components/pen.js) and the crossing pets (components/pets.js).
    Parents: Storeybrook × Depthfield. Family tasks H2 and H3 (stevoblevo/depthfield, docs/family.md).
    Everything degrades: with JS off the markup reads in order, stickers sit where they were put and tickers wrap. */
 (function (w, d) {
   'use strict';
   if (w.Hypermetapunk && w.Hypermetapunk.version) return;
-  var VERSION = '0.3.0';
+  var VERSION = '0.4.0';
   var THEMES = [
     { id: 'dusk', name: 'Dusk', light: false, motion: true, print: false, line: 'Neon at the horizon, chrome over violet' },
     { id: 'zine', name: 'Zine', light: true, motion: true, print: true, line: 'Photocopied in daylight, stapled, stickered' },
@@ -177,9 +178,11 @@
     function add(rule, severity, count, sample, fix) { out.push({ rule: rule, severity: severity, count: count, sample: String(sample || '').slice(0, 80), fix: fix }); }
     var texts = $$('p, h1, h2, h3, li, blockquote', scope).filter(function (t) { return vis(t) && words(t) > 3 && !t.closest('.hmp-sticker, .hmp-ticker, .hmp-stamp'); });
     var over = 0, overS = '';
+    /* plan C5: a floating layer ([data-hmp-layer], such as a found card) is its own page: its slaps are measured against its own words only */
+    function layer(e) { return e.closest ? e.closest('[data-hmp-layer]') : null; }
     $$('.hmp-sticker, .hmp-tape', scope).filter(vis).forEach(function (s) {
-      var a = s.getBoundingClientRect();
-      texts.forEach(function (t) { if (t.contains(s) || s.contains(t)) return; var b = t.getBoundingClientRect(); var ix = Math.min(a.right, b.right) - Math.max(a.left, b.left), iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top); if (ix > 12 && iy > 8) { over++; overS = overS || (s.textContent || 'tape').trim(); } });
+      var a = s.getBoundingClientRect(), L = layer(s);
+      texts.forEach(function (t) { if (t.contains(s) || s.contains(t) || layer(t) !== L) return; var b = t.getBoundingClientRect(); var ix = Math.min(a.right, b.right) - Math.max(a.left, b.left), iy = Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top); if (ix > 12 && iy > 8) { over++; overS = overS || (s.textContent || 'tape').trim(); } });
     });
     if (over) add('slap-over-words', 'warn', over, overS, 'Slap the frame — and cross the art, never the words. Stickers and tape may cross the sun, the grid or a picture; move this one off the text, to a corner or the margin.');
     var opaque = function (c) { return !/rgba\([^)]*,\s*0(\.0+)?\)$/.test(c) && c !== 'transparent'; };

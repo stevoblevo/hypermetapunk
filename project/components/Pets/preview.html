@@ -1,0 +1,43 @@
+<!-- @dsCard group="Punk" height=660 -->
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Pets</title>
+<style>html,body{margin:0}body.hmp-body{min-height:0}
+.pv-pets{display:grid;gap:8px;padding:14px 16px 16px}
+.pv-row{background:var(--void);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-md);padding:6px 10px 2px}
+.pv-row .hmp-label{margin:0;font:700 12px/1.4 var(--font-mono);letter-spacing:.06em;color:var(--ink-muted)}
+.pv-row canvas{display:block;width:100%;height:118px}
+.pv-row--still canvas{height:96px}
+</style></head>
+<body class="hmp-body">
+<div class="pv-pets">
+  <div class="pv-row" data-theme="dusk"><p class="hmp-label">Dusk · dancing to a fake beat, 104 a minute, felt with a swing</p><canvas role="img" aria-label="The five dusk pets in the Dusk theme, dancing: Vinyl the sticker cat, Snow the static moth, Offset the two-plate koi, Postmark the stamp crab and Flutter the tape bat."></canvas></div>
+  <div class="pv-row" data-theme="zine"><p class="hmp-label">Zine</p><canvas role="img" aria-label="The same five pets printed in the Zine theme, dancing."></canvas></div>
+  <div class="pv-row" data-theme="contrast"><p class="hmp-label">High contrast</p><canvas role="img" aria-label="The same five pets in High contrast, dancing."></canvas></div>
+  <div class="pv-row pv-row--still"><p class="hmp-label">Still: no motion at all, as under reduced motion or “hold still”</p><canvas role="img" aria-label="The five pets in the page's theme, held still."></canvas></div>
+</div>
+<script src="../pets.js"></script>
+<script>
+(function () {
+  var H = window.Hypermetapunk, P = H && H.pets; if (!P) return;
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.pv-row')), t0 = performance.now(), raf = 0, BPM = 104;
+  function beat(t) { var per = 60 / BPM, ph = (t % per) / per; return Math.exp(-ph * per * 5.5); }
+  function page() { var t = document.documentElement.getAttribute('data-theme'); return t === 'zine' || t === 'contrast' ? t : 'dusk'; }
+  function held() { return H.reducedMotion ? H.reducedMotion() : false; }
+  function draw(now) {
+    var t = (now - t0) / 1000, dpr = Math.min(2, window.devicePixelRatio || 1), s = held();
+    rows.forEach(function (r) {
+      var c = r.querySelector('canvas'), w = c.clientWidth, h = c.clientHeight, x = c.getContext('2d'), still = s || r.classList.contains('pv-row--still'), look = r.getAttribute('data-theme') || page();
+      if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); }
+      x.setTransform(dpr, 0, 0, dpr, 0, 0); x.clearRect(0, 0, w, h);
+      var slot = w / P.list.length, size = Math.min(h * 0.8, slot * 0.66);
+      P.list.forEach(function (p, i) { P.draw(x, p.id, { x: slot * (i + 0.5), y: h / 2, size: size, t: t, beat: still ? 0 : beat(t), look: look, still: still }); });
+    });
+    if (!s) raf = requestAnimationFrame(draw);
+  }
+  function again() { cancelAnimationFrame(raf); raf = requestAnimationFrame(draw); }
+  window.addEventListener('hmp:theme', again); window.addEventListener('hmp:still', again); window.addEventListener('resize', again);
+  new MutationObserver(again).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class'] });
+  again();
+})();
+</script>
+</body></html>

@@ -96,10 +96,40 @@ try {
     assert.equal(await phone.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`Phone overflow: ${path}`);
   }
   await phone.screenshot({path:join(ROOT,'test-results/chrome-phone.png'),fullPage:true});
+  // plan C5: the dusk pets. A clean context whose save already holds other kits' pets: every find must keep them.
+  const pc = await browser.newContext({viewport:{width:1360,height:860}});
+  const pets = await pc.newPage(); pets.on('pageerror',e=>problems.push(String(e)));
+  await pets.goto(`${base}/?theme=dusk`);
+  await pets.evaluate(()=>localStorage.setItem('crossing:pets',JSON.stringify({found:{'sb:egg':1,'df:winkle':2},active:{sb:'egg'}})));
+  await pets.reload(); await pets.evaluate(()=>document.fonts.ready);
+  assert.deepEqual(await pets.evaluate(()=>[Hypermetapunk.pets.count(),Hypermetapunk.pets.total()]),[0,{sb:1,df:1,hmp:0,all:2}]);
+  assert.equal(await pets.locator('#lattice').isHidden(),true,'the lattice stays hidden until all seventeen');
+  const seen=name=>pets.waitForFunction(n=>(document.querySelector('.fr-found h3')||{}).textContent===n,name,{timeout:5000});
+  const card=async name=>{await seen(name); await pets.locator('.fr-found button').click(); await pets.waitForFunction(()=>!document.querySelector('#found').firstChild);};
+  await pets.locator('.fr-peel').first().click(); await seen('Vinyl');
+  assert.deepEqual(await pets.evaluate(()=>Hypermetapunk.taste({log:false}).filter(x=>x.severity==='warn')),[],'taste with the found card up');
+  await card('Vinyl');
+  await pets.locator('#ticker-stop').click(); await card('Snow');
+  await pets.locator('#h-parts').hover(); await card('Offset');
+  await pets.mouse.move(5,300);
+  await pets.locator('[data-hmp-theme="zine"]').first().click(); await card('Postmark');
+  await pets.evaluate(()=>{document.addEventListener('click',e=>{if(e.target.closest('.hmp-door'))e.preventDefault();},true); document.querySelectorAll('#doors .hmp-door').forEach(a=>a.click());});
+  await pets.reload(); await seen('Flutter');   /* the doors lead away, so the card waits for the way back */
+  const saved=await pets.evaluate(()=>JSON.parse(localStorage.getItem('crossing:pets')));
+  assert.ok(saved.found['sb:egg']===1&&saved.found['df:winkle']===2&&saved.active.sb==='egg','other kits\' pets kept');
+  assert.deepEqual(Object.keys(saved.found).filter(k=>k.startsWith('hmp:')).sort(),['hmp:stamp-crab','hmp:static-moth','hmp:sticker-cat','hmp:tape-bat','hmp:two-plate-koi']);
+  assert.equal(await pets.evaluate(()=>Hypermetapunk.pets.find('hmp:sticker-cat')),false,'a find happens once');
+  await pets.evaluate(()=>{const v=JSON.parse(localStorage.getItem('crossing:pets'));['egg','kit','octopus','bunny','sprite','pixie','saelion'].forEach(i=>v.found['sb:'+i]=1);['glass-bloom','mint-spore','frost-seed','winkle','firefly'].forEach(i=>v.found['df:'+i]=1);localStorage.setItem('crossing:pets',JSON.stringify(v));});
+  await pets.reload();
+  assert.deepEqual(await pets.evaluate(()=>Hypermetapunk.pets.total()),{sb:7,df:5,hmp:5,all:17});
+  assert.equal(await pets.locator('#lattice a').getAttribute('href'),'https://stevoblevo.github.io/and-so/?lattice=1');
+  assert.equal(await pets.locator('#lattice').isVisible(),true,'all seventeen open the lattice');
+  await pets.screenshot({path:join(ROOT,'test-results/pets-front.png')});
+  await pc.close();
   await page.emulateMedia({forcedColors:'active'});
   await page.goto(`${base}/docs.html?theme=contrast#/components/Chrome`);
   const fc=await page.locator('iframe.frame').first().contentFrame();await fc.locator('h1').waitFor();
   assert.equal(await fc.locator('h1').evaluate(el=>getComputedStyle(el).webkitTextStrokeWidth),'0px');
   assert.deepEqual(problems,[]);
-  console.log(`PASS: three themes; ${count} docs previews; layered Chrome keyline; forced colours; 390px layout; no page exceptions.`);
+  console.log(`PASS: three themes; ${count} docs previews; layered Chrome keyline; five dusk pets found and saved beside the family's; forced colours; 390px layout; no page exceptions.`);
 } finally { if(browser) await browser.close(); server.close(); }

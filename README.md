@@ -1,6 +1,6 @@
 # Hypermetapunk
 
-The third design system in Bleve's family, the child of [Storeybrook](https://github.com/stevoblevo/storeybrook) (day) and [Depthfield](https://github.com/stevoblevo/depthfield) (night): hyperreal dusk, chrome and neon, slapped with stickers, stamps, tape and marker. Three themes (Dusk, Zine, High contrast), fourteen components and a behaviour bundle exposed as `window.Hypermetapunk`.
+The third design system in Bleve's family, the child of [Storeybrook](https://github.com/stevoblevo/storeybrook) (day) and [Depthfield](https://github.com/stevoblevo/depthfield) (night): hyperreal dusk, chrome and neon, slapped with stickers, stamps, tape and marker. Three themes (Dusk, Zine, High contrast), sixteen components, a behaviour bundle exposed as `window.Hypermetapunk`, and two add-ons: the pen for canvas and the crossing pets.
 
 Version 0.1 lifts "Hypermetapunk Kit v0", a block of CSS seeded on 1 November 2026 at the top of a bespoke.gig prototype (`storeybrook/show-tell/bespoke/bespoke-gig-hypermetapunk.html`), into the family's format. Unlike its parents it has no Claude artifact yet; this repo is the source until one is made (task C11).
 
@@ -20,10 +20,11 @@ project/
   tokens.css                           Compiled by site/build.py
   components/
     bundle.css, bundle.js, index.d.ts  Styles, window.Hypermetapunk, types
+    pen.js, pets.js                    Add-ons: the pen for canvas, the crossing pets
     <Component>/README.md              Guidelines (first sentence = summary)
     <Component>/preview.html           Live preview card
   assets/Mark/                         The mark
-index.html, site/front.css             The front page, built only from the kit
+index.html, site/front.css, front.js  The front page, built only from the kit (and where the dusk pets are found)
 docs.html, site/app.*                  The docs (shared shell with Storeybrook and Depthfield)
 site/build.py                          Compiles tokens.css, hooks.css and site.json
 site/immersive.js, manifest.webmanifest Full screen on phones (shared with the family)
@@ -43,7 +44,7 @@ python3 -m http.server 8703       # then open / and /docs.html
 
 ## Versioned runtime
 
-Current release: **0.3.0** (the pen: `Hypermetapunk.pen(theme)` draws the horizon on canvas). Pin `v/0.3.0/tokens.css`, `v/0.3.0/bundle.css` and `v/0.3.0/bundle.js` together; a game that only draws on canvas can pin `v/0.3.0/pen.js` alone. The original 0.1.0 runtime remains in `v/0.1.0/`. `v/index.json` records each file’s SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version.
+Current release: **0.4.0** (five dusk pets in the family's shared `crossing:pets` save, `Hypermetapunk.pets`; the pen die-cuts drawings as stickers). Pin `v/0.4.0/tokens.css`, `v/0.4.0/bundle.css` and `v/0.4.0/bundle.js` together; a game that only draws on canvas can pin `v/0.4.0/pen.js` and `v/0.4.0/pets.js` alone. `v/0.3.0/` (the first pen) is unchanged. The original 0.1.0 runtime remains in `v/0.1.0/`. `v/index.json` records each file’s SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version.
 
 See [CHANGELOG.md](CHANGELOG.md). A GitHub Pages deployment is not a browser-test pass.
 
