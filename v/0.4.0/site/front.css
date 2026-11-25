@@ -1,0 +1,121 @@
+/* Hypermetapunk front page — composition only. Colours, faces, sizes and timing are the kit's tokens. Family task H4 (first half). */
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { overflow-x: clip; }
+.fr-skip { position: absolute; left: -999px; top: 8px; z-index: 99; }
+.fr-skip:focus { left: 8px; background: var(--punk-acid); color: var(--punk-ink); padding: 8px 12px; }
+.fr-in { width: min(var(--size-container), 100%); margin-inline: auto; padding-inline: max(var(--space-4), env(safe-area-inset-left, 0px)); box-sizing: border-box; }
+
+/* the bar */
+.fr-bar { position: sticky; top: 0; z-index: var(--z-sticky); display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3) var(--space-4);
+  padding: max(10px, env(safe-area-inset-top, 0px)) max(var(--space-4), env(safe-area-inset-right, 0px)) 10px max(var(--space-4), env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--void) 90%, transparent); -webkit-backdrop-filter: blur(10px) saturate(1.5); backdrop-filter: blur(10px) saturate(1.5);
+  border-bottom: var(--border-slap) solid var(--punk-ink); box-shadow: 0 3px 0 var(--accent); }
+.fr-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font: 400 24px/1 var(--font-display); text-transform: lowercase; }
+.fr-brand b { font-weight: 400; color: var(--accent); }
+.fr-ver { font-size: 11px; padding: 0.3em 0.6em; box-shadow: 2.5px 2.5px 0 var(--slap); }
+.fr-themes, .fr-tools { display: flex; gap: 6px; flex-wrap: wrap; }
+.fr-themes { margin-left: auto; }
+@media (max-width: 760px) {
+  .fr-themes { order: 3; margin-left: 0; width: 100%; } .fr-tools { margin-left: auto; } .fr-ver, .fr-tools .fr-still { display: none; }
+  .fr-full [data-immersive-label] { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+}
+
+/* the horizon */
+.fr-hero { min-height: min(86vh, 860px); display: grid; grid-template-columns: minmax(0, 1fr); align-items: end; padding: var(--space-9) 0 calc(var(--space-9) + 4vh); }
+.fr-hero h1 { font-size: clamp(28px, 7.4vw, 104px); }   /* plan P3: one long word, whole at every width — the K clipped at 1919px in Dusk and Zine */
+.fr-hero .fr-sun { --sun: clamp(220px, 34vw, 420px); }
+.fr-kicker { color: inherit; opacity: 0.9; margin-bottom: var(--space-3); }
+.fr-lede { margin: var(--space-4) 0 var(--space-5); color: inherit; }
+[data-theme="dusk"] .fr-hero .fr-lede { text-shadow: 0 1px 12px rgba(6, 3, 15, 0.9); }
+.fr-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0 0 var(--space-5); }
+.fr-note { --tilt: -2deg; color: #fff; text-shadow: 0 1px 10px rgba(6, 3, 15, 0.9); }
+[data-theme="zine"] .fr-note { color: var(--punk-ink); text-shadow: none; }
+[data-theme="contrast"] .fr-note { color: var(--ink); text-shadow: none; }
+
+/* sections */
+.fr-sec { padding: var(--space-9) 0; }
+.fr-sec + .fr-sec { border-top: 1px solid var(--line); }
+.fr-sec .hmp-lede { margin: var(--space-4) 0 var(--space-7); color: var(--ink-muted); }
+.fr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--space-6) var(--space-5); }
+.fr-part p { margin: 0 0 var(--space-3); }
+.fr-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.fr-mini { height: 130px; border-radius: var(--r-md); margin: 0 0 var(--space-3); }
+.fr-mini .hmp-sun { bottom: 30%; }
+
+.fr-trio { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: var(--space-5); }
+.fr-face { background: var(--void); color: var(--ink); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--space-4); }
+.fr-face h3 { margin: var(--space-2) 0; }
+.fr-face p { margin: 0 0 var(--space-3); color: var(--ink-muted); }
+.fr-face .fr-row { color: var(--ink); }
+/* plan P3: in the trio, the lead theme's sun sits on an ink offset plate */
+.fr-face[data-theme="zine"] .hmp-sun { box-shadow: 7px 7px 0 var(--punk-ink); }
+
+.fr-from { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-6); align-items: center; }
+.fr-from .hmp-card p { max-width: var(--size-measure); }
+@media (max-width: 760px) { .fr-from { grid-template-columns: 1fr; } }
+
+/* the doors */
+.fr-foot { padding: var(--space-8) 0 calc(var(--space-8) + env(safe-area-inset-bottom, 0px)); border-top: var(--border-slap) solid var(--punk-ink); background: var(--surface); }
+.fr-doors { display: flex; flex-wrap: wrap; gap: var(--space-7); align-items: flex-end; margin-bottom: var(--space-6); }
+.fr-fine { color: var(--ink-muted); margin: 0; }
+.fr-still-foot { margin: 0 0 var(--space-4); }
+.fr-full { gap: 6px; }
+
+/* phones: the horizon is as tall as its words, and the sun sits behind them */
+@media (max-width: 760px) {
+  .fr-hero { min-height: 0; padding: 250px 0 var(--space-8); } .fr-hero .fr-sun { --sun: 190px; bottom: auto; top: 40px; }
+  .fr-brand { font-size: 18px; gap: 8px; } .fr-brand img { width: 26px; height: 26px; }
+  .fr-full { padding-inline: 10px; }
+}
+
+/* plan C5: the dusk pets, found by doing what the kit is for */
+.fr-petchip { gap: 4px; }
+/* the ticker has its own stop: the button sits on the strip, and stopping it is one of the finds */
+.fr-tickrow { display: flex; align-items: stretch; border-block: var(--border-slap) solid var(--punk-ink); background: var(--punk-acid); }
+.fr-tickrow .hmp-ticker { flex: 1 1 auto; min-width: 0; border-block: 0; }
+.fr-tick-stop { flex: none; min-height: 44px; padding: 0 14px; border: 0; border-left: var(--border-slap) solid var(--punk-ink); background: var(--punk-acid); color: var(--punk-ink); font: 700 13px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.fr-tick-stop:hover { background: var(--punk-paper); }
+[data-theme="contrast"] .fr-tickrow, [data-theme="contrast"] .fr-tick-stop { background: var(--void); color: var(--ink); border-color: var(--ink); }
+/* a sticker that peels: its corner lifts, it comes up off the card, and it curls back down */
+.fr-peel { cursor: pointer; touch-action: manipulation; }
+.fr-peel.is-peeling { animation: fr-peel 900ms var(--ease-out) both; }
+.fr-peel.is-peeling::after { content: ""; position: absolute; right: -3px; bottom: -3px; width: 24px; height: 24px; border-radius: 0 0 22px 0; pointer-events: none; background: linear-gradient(315deg, transparent 44%, rgba(13, 13, 18, 0.4) 49%, rgba(255, 255, 255, 0.85) 54%, rgba(230, 230, 236, 0.95) 70%, transparent 74%); }
+@keyframes fr-peel { 0% { translate: 0 0; } 28% { translate: 3px -8px; rotate: calc(var(--tilt, -2.5deg) - 8deg); box-shadow: 9px 12px 0 var(--slap); border-bottom-right-radius: 20px; } 62% { translate: 1px -3px; rotate: calc(var(--tilt, -2.5deg) - 3deg); } 100% { translate: 0 0; } }
+/* the misregistered heading: hold the pointer on it and the plates walk apart, then slip */
+.fr-sec .hmp-misreg.is-holding { text-shadow: calc(3 * var(--tex-misreg)) 2px 0 var(--wave-cyan), calc(-3 * var(--tex-misreg)) -2px 0 var(--punk-magenta); transition: text-shadow 1.2s linear; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.fr-sec .hmp-misreg.is-slipped { text-shadow: calc(6 * var(--tex-misreg)) 4px 0 var(--wave-cyan), calc(-6 * var(--tex-misreg)) -4px 0 var(--punk-magenta); transition: text-shadow var(--dur-snap) var(--ease-snap); }
+[data-theme="contrast"] .fr-sec .hmp-misreg.is-holding, [data-theme="contrast"] .fr-sec .hmp-misreg.is-slipped { text-shadow: none; }
+/* the list */
+.fr-petsum { margin: calc(-1 * var(--space-5)) 0 var(--space-4); font: 700 15px/1.4 var(--font-mono); }
+.fr-petlist { list-style: none; margin: 0 0 var(--space-6); padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: var(--space-4); }
+.fr-pet { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 14px; align-items: center; padding: 10px 14px 10px 8px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); }
+.fr-pet canvas { display: block; width: 88px; height: 88px; }
+.fr-pet b { display: block; font: 400 19px/1.2 var(--font-display); text-transform: uppercase; }
+.fr-pet small { display: block; margin-top: 4px; color: var(--ink-muted); font-size: 15px; line-height: 1.4; }
+.fr-pet.is-found { border-color: var(--cue); box-shadow: inset 4px 0 0 var(--cue); }
+.fr-family { list-style: none; margin: 0 0 var(--space-5); padding: 0; display: grid; gap: 10px; font: 400 16px/1.45 var(--font-sans); }
+.fr-family li { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; }
+.fr-lattice[hidden] { display: none; }
+.fr-lattice { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin: 0; font: 700 15px/1.4 var(--font-mono); }
+/* the opened doors */
+.fr-door-mark { font-size: 11px; padding: 0.15em 0.5em; --tilt: -5deg; }
+/* the slap-on card, bottom right, over everything; its own layer for the page check */
+.fr-found { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(16px, env(safe-area-inset-bottom, 0px)); z-index: var(--z-overlay); width: min(360px, calc(100vw - 32px)); pointer-events: none; }
+.fr-found__wrap { position: relative; pointer-events: auto; }
+.fr-found__card { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; align-items: start; padding: calc(var(--space-6) + 14px) var(--space-4) var(--space-6); }
+.fr-found__pet { display: block; width: 104px; height: 104px; }
+.fr-found__card h3 { margin: 2px 0 6px; }
+.fr-found .hmp-label { color: inherit; }   /* on the paper card the kicker prints in the card's own ink */
+.fr-found .hmp-btn--ghost { color: inherit; border-color: currentColor; }
+.fr-found__line { margin: 0 0 10px; font-size: 15px; line-height: 1.45; }
+.fr-found__row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 0; }
+.fr-found__n { position: absolute; right: -6px; top: -14px; font-size: 13px; }
+.fr-found__wrap.is-in { animation: fr-slap 420ms var(--ease-snap) both; }
+.fr-found__wrap.is-out { animation: fr-unslap 320ms var(--ease-out) both; }
+@keyframes fr-slap { 0% { opacity: 0; scale: 1.3; rotate: -7deg; translate: 0 -14px; } 55% { opacity: 1; scale: 0.97; rotate: 1.2deg; translate: 0 0; } 100% { scale: 1; rotate: 0deg; } }
+@keyframes fr-unslap { to { opacity: 0; translate: 28px 12px; rotate: 6deg; } }
+@media (prefers-reduced-motion: reduce) { .fr-peel.is-peeling, .fr-found__wrap.is-in, .fr-found__wrap.is-out { animation: none; } .fr-sec .hmp-misreg.is-holding { transition: none; } }
+html.hmp-still .fr-peel.is-peeling, html.hmp-still .fr-found__wrap.is-in, html.hmp-still .fr-found__wrap.is-out { animation: none; }
+html.hmp-still .fr-sec .hmp-misreg.is-holding { transition: none; }
+@media (max-width: 760px) { .fr-found__card { grid-template-columns: 84px minmax(0, 1fr); } .fr-found__pet { width: 84px; height: 84px; } .fr-petchip { order: -1; } }

@@ -7,6 +7,7 @@
 - New Plate component page: the source drawing (drag on it to add to it), the plate in the current theme, and all three side by side.
 - Front page on phones: the one long word now breaks after "Hypermeta" and stands at 32 px or more, so chrome type passes its own taste rule at 390 px; a slap that hangs off a card's corner no longer makes the page scroll sideways.
 - `tools/check.mjs` makes the three plates from one drawing and checks the phone headline, taste and width in all three themes.
+- Front pages are versioned too. `tools/release.py` now freezes `index.html`, with the styles and scripts it loads, under `v/<version>/` (new `tools/landing.py`), so `/v/0.5.0/` is this release's front page on this release's runtime. The front pages of 0.2.0, 0.3.0 and 0.4.0 are back-filled from history into their folders; nothing that was already there is changed.
 - All published runtimes from 0.1.0 to 0.4.0 remain unchanged; `pets.js` is byte-identical to 0.4.0.
 
 ## 0.4.0

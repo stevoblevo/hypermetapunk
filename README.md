@@ -98,6 +98,6 @@ python3 -m http.server 8703       # then open / and /docs.html
 
 ## Versions
 
-Current release: **0.5.0**. Pin `v/0.5.0/tokens.css`, `v/0.5.0/bundle.css` and `v/0.5.0/bundle.js` together; a game that only draws on canvas can pin `v/0.5.0/pen.js`, `v/0.5.0/plate.js` and `v/0.5.0/pets.js` alone. Every earlier runtime stays where it was, byte for byte, from `v/0.1.0/` on. `v/index.json` records each file's SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version. A GitHub Pages deployment is not a browser-test pass.
+Current release: **0.5.0**. Pin `v/0.5.0/tokens.css`, `v/0.5.0/bundle.css` and `v/0.5.0/bundle.js` together; a game that only draws on canvas can pin `v/0.5.0/pen.js`, `v/0.5.0/plate.js` and `v/0.5.0/pets.js` alone. Every earlier runtime stays where it was, byte for byte, from `v/0.1.0/` on. Each version also keeps its own front page: open [`v/0.5.0/`](v/0.5.0/) for the page as it shipped, running on that version's runtime, and `v/0.2.0/`, `v/0.3.0/` or `v/0.4.0/` for the ones before it. `v/index.json` records each file's SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version, its front page included. A GitHub Pages deployment is not a browser-test pass.
 
 </details>

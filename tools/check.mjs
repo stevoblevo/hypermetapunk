@@ -113,6 +113,15 @@ try {
     assert.deepEqual(await hp.evaluate(()=>Hypermetapunk.taste({log:false}).filter(x=>x.severity==='warn')),[],`${theme} front-page taste at 390 px`);
     assert.equal(await hp.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${theme}: no sideways scroll at 390 px`); }
   await hp.close();
+  // plan C14: every version that has a frozen front page opens it, on its own runtime, with nothing missing.
+  const { readdir, access } = await import('node:fs/promises'); let frozen=0;
+  for(const ver of (await readdir(join(ROOT,'v'))).sort()){ try{ await access(join(ROOT,'v',ver,'index.html')); }catch{ continue; }
+    const missing=[]; const onResp=r=>{ if(r.status()>=400 && r.url().startsWith(base)) missing.push(r.url()); }; page.on('response',onResp);
+    await page.goto(`${base}/v/${ver}/`); await page.evaluate(()=>document.fonts.ready);
+    assert.equal(await page.evaluate(()=>window.Hypermetapunk.version),ver,`v/${ver}/ runs its own runtime`);
+    assert.equal(await page.evaluate(()=>[...document.styleSheets].filter(s=>s.href&&s.href.startsWith(location.origin)).every(s=>s.href.includes(location.pathname))),true,`v/${ver}/ loads its own styles`);
+    page.off('response',onResp); assert.deepEqual(missing,[],`v/${ver}/ has every file it asks for`); frozen++; }
+  assert.ok(frozen>=4,'frozen front pages are present');
   // plan C5: the dusk pets. A clean context whose save already holds other kits' pets: every find must keep them.
   const pc = await browser.newContext({viewport:{width:1360,height:860}});
   const pets = await pc.newPage(); pets.on('pageerror',e=>problems.push(String(e)));
