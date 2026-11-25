@@ -1,14 +1,58 @@
+<img src="site/icons/icon-192.png" alt="Hypermetapunk mark" width="84">
+
 # Hypermetapunk
 
-The third design system in Bleve's family, the child of [Storeybrook](https://github.com/stevoblevo/storeybrook) (day) and [Depthfield](https://github.com/stevoblevo/depthfield) (night): hyperreal dusk, chrome and neon, slapped with stickers, stamps, tape and marker. Three themes (Dusk, Zine, High contrast), fourteen components and a behaviour bundle exposed as `window.Hypermetapunk`.
+A dusk design system with chrome type, a neon horizon and the marks of a print shop: slipped plates, photocopy grain, tape and stickers. Tape can cross the artwork, never the words.
 
-Version 0.1 lifts "Hypermetapunk Kit v0", a block of CSS seeded on 1 November 2026 at the top of a bespoke.gig prototype (`storeybrook/show-tell/bespoke/bespoke-gig-hypermetapunk.html`), into the family's format. Unlike its parents it has no Claude artifact yet; this repo is the source until one is made (task C11).
+**Dusk · Zine · High contrast**
 
-**Live:** <https://stevoblevo.github.io/hypermetapunk/> (front page) and <https://stevoblevo.github.io/hypermetapunk/docs.html> (docs).
+[Open the showcase](https://stevoblevo.github.io/hypermetapunk/) · [Read the interactive docs](https://stevoblevo.github.io/hypermetapunk/docs.html) · [Compare the Saelion toolkits](https://saelion.co/toolkits)
 
-## Start here
+## Try it
 
-Read [`project/README.md`](project/README.md), the brand book. What comes next, and why: [`docs/plan.md`](docs/plan.md) and [`docs/creative-direction.md`](docs/creative-direction.md). Any agent can pick a task; [`AGENTS.md`](AGENTS.md) has the rules. The family's shared contracts are in [`depthfield/docs/family.md`](https://github.com/stevoblevo/depthfield/blob/main/docs/family.md).
+Open the [live front page](https://stevoblevo.github.io/hypermetapunk/) and swap from **Dusk** to **Zine** to see the same parts turn into a print layout. Then try **High contrast** or choose an accent under **Three themes, one page**.
+
+## Use it in a page
+
+From the repository root, save this as `scratch.html` and run `python3 -m http.server 8703`. Open `http://localhost:8703/scratch.html`. No package install is needed for this example. The kit stylesheets can load web fonts; your browser uses fallback fonts when unavailable.
+
+```html
+<!doctype html>
+<html lang="en" data-theme="zine">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hypermetapunk example</title>
+  <link rel="stylesheet" href="v/0.2.0/tokens.css">
+  <link rel="stylesheet" href="v/0.2.0/bundle.css">
+  <script src="v/0.2.0/bundle.js"></script>
+</head>
+<body class="hmp-body">
+  <h1>The print room</h1>
+  <span class="hmp-sticker">Doors open</span>
+  <script>Hypermetapunk.accent.set('#e8ff00', { keep: false });</script>
+</body>
+</html>
+```
+
+Use the three files from the same [0.2.0 runtime](v/0.2.0/). The [version manifest](v/index.json) records their SHA-256 hashes. The [Accent](project/components/Accent/README.md) API adjusts chosen colors for legibility; `keep: false` makes the selection temporary. See also [Sticker](project/components/Sticker/README.md).
+
+## Project notes
+
+[Brand book](project/README.md) · [Changelog](CHANGELOG.md) · [Creative direction](docs/creative-direction.md) · [Component types](project/components/index.d.ts)
+
+This repository is the design source. The [standalone materials candidate](packages/materials/README.md) is experimental and separate from the 0.2.0 UI runtime. For ongoing work, see the [continuity handoff](docs/claude-handoff.md) and [material experiment](experiments/materials/README.md). For site development and checks, see [AGENTS.md](AGENTS.md).
+
+### The toolkit family
+
+[Storeybrook](https://github.com/stevoblevo/storeybrook) · [Depthfield](https://github.com/stevoblevo/depthfield) · [Shared toolkit contracts](https://github.com/stevoblevo/depthfield/blob/main/docs/family.md)
+
+### License
+
+The source is publicly viewable. No repository-wide license is published here; public visibility does not grant general permission to reuse or redistribute the code or artwork. Check individual notices for third-party materials, and ask the owner before reusing toolkit assets or code outside the repository.
+
+<details>
+<summary>Repository reference and maintenance notes</summary>
 
 ## Layout
 
@@ -41,20 +85,4 @@ node tools/check.mjs              # front page and docs in three themes, desktop
 python3 -m http.server 8703       # then open / and /docs.html
 ```
 
-## Versioned runtime
-
-Current patch: **0.2.0**. Pin `v/0.2.0/tokens.css`, `v/0.2.0/bundle.css` and `v/0.2.0/bundle.js` together. The original 0.1.0 runtime remains in `v/0.1.0/`. `v/index.json` records each file’s SHA-256. Run `python3 -I tools/release.py` after the build; it refuses to change an existing version.
-
-See [CHANGELOG.md](CHANGELOG.md). A GitHub Pages deployment is not a browser-test pass.
-
-## Custom accents (0.1.2)
-
-Use the controls under “Three themes, one page”, or call `Hypermetapunk.accent.set('#e8ff00')`. Choices are separate per theme; unreadable colours are adjusted and disclosed. `Hypermetapunk.accent.reset()` restores the original. See [Accent](project/components/Accent/README.md) for the API.
-
-## Shared experimental work
-
-See the [Claude continuity handoff](docs/claude-handoff.md) and [isolated material experiment](experiments/materials/README.md). The released 0.1.3 runtime is unchanged.
-
-## Optional game material candidate
-
-The [standalone material package](packages/materials/README.md) offers a pinned, draw-only eight-world Canvas background candidate with a host contract, declarations, integrity manifest and adoption fixture. It is experimental and separate from the released 0.1.3 UI; game-owner and browser/device acceptance are required before production adoption.
+</details>
