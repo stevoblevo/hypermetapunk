@@ -1,4 +1,4 @@
-/* Hypermetapunk 0.4.0 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
+/* Hypermetapunk 0.5.0 · behaviours for hyperreal, slapped-together pages. One classic script, no dependencies, no network.
    window.Hypermetapunk: theme, still (motion off), ticker, slap, taste, token, reducedMotion, init, looks. Add-ons, loaded after
    this file: the pen for canvas (components/pen.js) and the crossing pets (components/pets.js).
    Parents: Storeybrook × Depthfield. Family tasks H2 and H3 (stevoblevo/depthfield, docs/family.md).
@@ -6,11 +6,11 @@
 (function (w, d) {
   'use strict';
   if (w.Hypermetapunk && w.Hypermetapunk.version) return;
-  var VERSION = '0.4.0';
+  var VERSION = '0.5.0';
   var THEMES = [
-    { id: 'dusk', name: 'Dusk', light: false, motion: true, print: false, line: 'Neon at the horizon, chrome over violet' },
-    { id: 'zine', name: 'Zine', light: true, motion: true, print: true, line: 'Photocopied in daylight, stapled, stickered' },
-    { id: 'contrast', name: 'High contrast', light: false, motion: false, print: false, line: 'Black, white and acid, nothing lost' }
+    { id: 'dusk', name: 'Dusk', light: false, motion: true, print: false, mood: 'lit', line: 'Neon at the horizon, chrome over violet' },
+    { id: 'zine', name: 'Zine', light: true, motion: true, print: true, mood: 'impact', line: 'Photocopied in daylight, stapled, stickered' },
+    { id: 'contrast', name: 'High contrast', light: false, motion: false, print: false, mood: 'impact', line: 'Black, white and acid, nothing lost' }
   ];
   var IDS = THEMES.map(function (t) { return t.id; });
   var root = d.documentElement;

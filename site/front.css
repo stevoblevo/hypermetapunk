@@ -68,6 +68,10 @@ body { overflow-x: clip; }
   .fr-brand { font-size: 18px; gap: 8px; } .fr-brand img { width: 26px; height: 26px; }
   .fr-full { padding-inline: 10px; }
 }
+/* 0.5.0: on a phone the one long word breaks after "Hypermeta" and stands at chrome's size (32 px or more), and a
+   slap that hangs off a card's corner no longer widens the page */
+@media (max-width: 520px) { .fr-hero h1 { font-size: clamp(32px, 10vw, 46px); line-height: 0.94; } }
+main { overflow-x: clip; }
 
 /* plan C5: the dusk pets, found by doing what the kit is for */
 .fr-petchip { gap: 4px; }

@@ -1,5 +1,6 @@
-/* Hypermetapunk 0.4.0 · the pen: a theme's inks and its horizon, for games that draw on canvas (plan C4, family F4).
-   Hypermetapunk.looks        the three themes as data (id, name, light, motion, print)
+/* Hypermetapunk 0.5.0 · the pen: a theme's inks and its horizon, for games that draw on canvas (plan C4, family F4).
+   Hypermetapunk.looks        the three themes as data (id, name, light, motion, print, and since 0.5.0 mood: what a
+                              theme rewards in play, 'lit' in Dusk and 'impact' in Zine and High contrast; family F10)
    Hypermetapunk.pen(theme)   resolved inks, and a pen that draws the dusk band, the banded sun, the grid floor, chrome
                               and misregistered lettering, the print materials, and (0.4.0, plan C5) die-cuts any
                               drawing as a sticker
@@ -8,11 +9,11 @@
   'use strict';
   var H = w.Hypermetapunk = w.Hypermetapunk || {};
   if (H.pen) return;
-  var VERSION = '0.4.0', root = d.documentElement;
+  var VERSION = '0.5.0', root = d.documentElement;
   var LOOKS = [
-    { id: 'dusk', name: 'Dusk', light: false, motion: true, print: false, line: 'Neon at the horizon, chrome over violet' },
-    { id: 'zine', name: 'Zine', light: true, motion: true, print: true, line: 'Photocopied in daylight, stapled, stickered' },
-    { id: 'contrast', name: 'High contrast', light: false, motion: false, print: false, line: 'Black, white and acid, nothing lost' }
+    { id: 'dusk', name: 'Dusk', light: false, motion: true, print: false, mood: 'lit', line: 'Neon at the horizon, chrome over violet' },
+    { id: 'zine', name: 'Zine', light: true, motion: true, print: true, mood: 'impact', line: 'Photocopied in daylight, stapled, stickered' },
+    { id: 'contrast', name: 'High contrast', light: false, motion: false, print: false, mood: 'impact', line: 'Black, white and acid, nothing lost' }
   ];
   function token(name, el) { try { return getComputedStyle(el || root).getPropertyValue('--' + name).trim(); } catch (e) { return ''; } }
   function reduced() { try { return root.classList.contains('hmp-still') || w.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } }

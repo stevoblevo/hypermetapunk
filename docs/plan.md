@@ -6,16 +6,19 @@ Owner: Bleve. Last updated 23 Nov 2026 by Claude (session 01SjkUtV9TUafBVoQhywHh
 
 ## Where things stand
 
-- **0.1.0** on `main`, served at <https://stevoblevo.github.io/hypermetapunk/>: three themes (Dusk, Zine, High contrast), 77 text pairs at 4.5:1 or better, open-licence type, thirteen components, `window.Hypermetapunk` (theme, still, ticker, slap, taste), a brand book in eight chapters, a front page built only from the kit, and the family's shared docs.
+- **0.5.0** is the current runtime (25 Nov 2026): seventeen components, three themes each with a mood, and three canvas add-ons, the pen (0.3.0), the crossing pets (0.4.0) and the plate (0.5.0). Every earlier runtime is kept under `v/`.
+- It began as **0.1.0**, served at <https://stevoblevo.github.io/hypermetapunk/>: three themes (Dusk, Zine, High contrast), 77 text pairs at 4.5:1 or better, open-licence type, thirteen components, `window.Hypermetapunk` (theme, still, ticker, slap, taste), a brand book in eight chapters, a front page built only from the kit, and the family's shared docs.
 - First hosts not yet moved over: bespoke.gig (`storeybrook/show-tell/bespoke/` and `storeybrook/bespoke-v5/`) and AND SO's `hmp` skin (`stevoblevo.github.io/_src/and-so`).
 
 ## Suggested order
 
-1. C1 Sign, C2 Flyer and C3 the wall (the signature pieces) → 0.2
-2. H4 bespoke.gig on the kit, C4 the pen → 0.3
-3. C5 crossing pets (done, 0.4.0) and C6 holo foil → 0.4
-4. C7 zine reader and print, C8 the signal → 0.5
-5. C9 one state, many faces (with family F4) → 1.0
+1. The punk-damage pass (P3; done, 0.2.0)
+2. C4 the pen (done, 0.3.0); H4 bespoke.gig on the kit is still open
+3. C5 crossing pets (done, 0.4.0)
+4. The plate and the moods (C13, family F9 and F10; done, 0.5.0)
+5. C1 Sign, C2 Flyer, C3 the wall, C6 holo foil → 0.6
+6. C7 zine reader and print, C8 the signal → 0.7
+7. C9 one state, many faces (with family F4 and F9) → 1.0
 
 ## Tasks
 
@@ -38,6 +41,7 @@ Owner: Bleve. Last updated 23 Nov 2026 by Claude (session 01SjkUtV9TUafBVoQhywHh
 | C10 | **Icons** on the family's 24 px grid (star, door, stamp, tape, sign, flyer, tab, moth) and an Icons asset group | `Hypermetapunk.icon(name)`; shown in the docs' Assets | M | open | open |
 | C11 | **A Claude artifact** for Hypermetapunk (family F8), so Claude Design can use it | The artifact lists the same components as `project/` | M | open | open |
 | C12 | **Tape-deck motion**: an optional tracking wobble on page cuts and a rewind smear on a jump to the top | Off under reduced motion and "hold still"; never longer than 400 ms | S | open | open |
+| C13 | **The plate** (family F9, the Hypermetapunk half) and **moods** (family F10): `components/plate.js`, `Hypermetapunk.plate(theme, source)`: a neon halftone in Dusk, a xerox with one red in Zine, a solid cut in High contrast, the sound word as the one accent, with the shared `tint` and `edges`; `mood` on every theme in `Hypermetapunk.looks`. The front page's headline stands at 32 px or more on phones and the page no longer scrolls sideways at 390 px | The Plate page makes three plates from one drawing and remakes them when the drawing changes; `tools/check.mjs` passes, with taste clean at 390 px in all three themes | M | Claude | done (0.5.0, branch `claude/F9-plate-mood`) |
 
 ## Parked (needs Bleve)
 

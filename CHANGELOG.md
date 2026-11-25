@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.0
+
+- The plate (family F9, the Hypermetapunk half): a new add-on, `components/plate.js`, loaded after `pen.js`. `Hypermetapunk.plate(theme, source, { word, seed, font })` takes one canvas of flat fills on transparency and returns a new canvas of the same size in the theme's material: a neon halftone in Dusk, a xerox with one red in Zine, a solid cut in High contrast. The accent is always the sound word (`SLAP` unless told otherwise; `word: ''` leaves it out), placed in the emptiest corner. `Hypermetapunk.tint` and `Hypermetapunk.edges` are the family's two shared helpers. It reads no CSS and never changes the source.
+- Moods (family F10): every entry of `Hypermetapunk.looks` carries `mood`, `lit` in Dusk and `impact` in Zine and High contrast.
+- New Plate component page: the source drawing (drag on it to add to it), the plate in the current theme, and all three side by side.
+- Front page on phones: the one long word now breaks after "Hypermeta" and stands at 32 px or more, so chrome type passes its own taste rule at 390 px; a slap that hangs off a card's corner no longer makes the page scroll sideways.
+- `tools/check.mjs` makes the three plates from one drawing and checks the phone headline, taste and width in all three themes.
+- All published runtimes from 0.1.0 to 0.4.0 remain unchanged; `pets.js` is byte-identical to 0.4.0.
+
 ## 0.4.0
 
 - Crossing pets, the third set (plan C5): the add-on `components/pets.js` gives `Hypermetapunk.pets` (`kit`, `key`, `version`, `list`, `has`, `find`, `count`, `total`, `draw`), the same contract Storeybrook and Depthfield keep. Five dusk pets join the family's shared save, `localStorage['crossing:pets']`, as `hmp:` keys; every write reads the save first and adds one key, so the day (`sb:`) and night (`df:`) pets are never touched. `total()` counts the family from the same save (7 + 5 + 5 = 17).

@@ -1,0 +1,47 @@
+<!-- @dsCard group="Horizon" height=640 -->
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Plate</title>
+<style>html,body{margin:0}body.hmp-body{min-height:0}.pv-plate{padding:18px 20px 16px;display:grid;gap:10px}.pv-plate canvas{display:block;width:100%;height:auto}.pv-plate .top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:14px;align-items:start}.pv-plate .src{border:var(--border-thick,3px) dashed var(--line);touch-action:none;cursor:crosshair;background:var(--surface-raised);box-sizing:border-box}.pv-plate .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.pv-plate .hmp-label{margin:4px 0 0}.pv-plate .bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}.pv-plate .sw{width:44px;height:44px;border:var(--border-thick,3px) solid var(--line);padding:0;cursor:pointer}.pv-plate .sw[aria-pressed="true"]{outline:3px solid var(--focus);outline-offset:2px}@media(max-width:560px){.pv-plate .top{grid-template-columns:1fr}}</style></head>
+<body class="hmp-body">
+<div class="pv-plate">
+<div class="top">
+  <div>
+    <canvas id="pv-src" class="src" width="480" height="480" role="img" aria-label="The drawing: a seal on a rock balancing a star, in flat colours. Drag on it to add to the drawing."></canvas>
+    <div class="bar" role="group" aria-label="Brush colour"><button class="sw" style="background:#f2c14e" data-c="#f2c14e" aria-pressed="true" aria-label="Yellow"></button><button class="sw" style="background:#6b8fae" data-c="#6b8fae" aria-pressed="false" aria-label="Blue"></button><button class="sw" style="background:#1f2a37" data-c="#1f2a37" aria-pressed="false" aria-label="Dark"></button><button class="hmp-btn hmp-btn--ghost" id="pv-again" type="button">Start over</button></div>
+    <p class="hmp-label">The one drawing · flat fills · drag to add to it</p>
+  </div>
+  <div><div id="pv-big"></div><p class="hmp-label" id="pv-cap" aria-live="polite"></p></div>
+</div>
+<div class="row" id="pv-row"></div>
+</div>
+<script src="../pen.js"></script>
+<script src="../plate.js"></script>
+<script>
+(function () {
+  var H = window.Hypermetapunk; if (!H || !H.plate) return;
+  function drawSeal(g, W, H) { var s = Math.min(W, H), ox = (W - s) / 2, oy = (H - s) / 2; function X(v) { return ox + v * s; } function Y(v) { return oy + v * s; } g.save(); g.lineJoin = 'round'; g.fillStyle = '#3f4a5a'; g.beginPath(); g.moveTo(X(.2), Y(.93)); g.quadraticCurveTo(X(.24), Y(.8), X(.4), Y(.8)); g.lineTo(X(.78), Y(.79)); g.quadraticCurveTo(X(.9), Y(.82), X(.9), Y(.93)); g.closePath(); g.fill(); g.fillStyle = '#4d6f8c'; g.beginPath(); g.moveTo(X(.72), Y(.76)); g.quadraticCurveTo(X(.86), Y(.7), X(.9), Y(.6)); g.quadraticCurveTo(X(.86), Y(.7), X(.94), Y(.74)); g.quadraticCurveTo(X(.86), Y(.8), X(.74), Y(.82)); g.closePath(); g.fill(); g.beginPath(); g.moveTo(X(.74), Y(.74)); g.quadraticCurveTo(X(.84), Y(.66), X(.88), Y(.56)); g.quadraticCurveTo(X(.92), Y(.68), X(.8), Y(.8)); g.closePath(); g.fill(); g.fillStyle = '#6b8fae'; g.beginPath(); g.moveTo(X(.8), Y(.81)); g.bezierCurveTo(X(.72), Y(.58), X(.66), Y(.36), X(.52), Y(.25)); g.bezierCurveTo(X(.44), Y(.19), X(.36), Y(.2), X(.3), Y(.25)); g.bezierCurveTo(X(.26), Y(.29), X(.28), Y(.34), X(.34), Y(.36)); g.bezierCurveTo(X(.38), Y(.5), X(.36), Y(.7), X(.42), Y(.82)); g.closePath(); g.fill(); g.fillStyle = '#c9dbe8'; g.beginPath(); g.moveTo(X(.36), Y(.38)); g.bezierCurveTo(X(.48), Y(.46), X(.56), Y(.64), X(.58), Y(.81)); g.lineTo(X(.42), Y(.82)); g.bezierCurveTo(X(.36), Y(.7), X(.39), Y(.5), X(.36), Y(.38)); g.closePath(); g.fill(); g.fillStyle = '#4d6f8c'; g.beginPath(); g.moveTo(X(.42), Y(.56)); g.quadraticCurveTo(X(.3), Y(.62), X(.22), Y(.76)); g.quadraticCurveTo(X(.34), Y(.74), X(.46), Y(.66)); g.closePath(); g.fill(); g.fillStyle = '#1f2a37'; g.beginPath(); g.arc(X(.295), Y(.262), s * .017, 0, 7); g.fill(); g.beginPath(); g.arc(X(.42), Y(.265), s * .014, 0, 7); g.fill(); g.fillStyle = '#f2c14e'; g.beginPath(); for (var i = 0; i < 10; i++) { var a = -Math.PI / 2 + i * Math.PI / 5 + .2, r = (i % 2 ? .034 : .078) * s; g.lineTo(X(.25) + Math.cos(a) * r, Y(.135) + Math.sin(a) * r); } g.closePath(); g.fill(); g.restore(); }
+  var src = document.getElementById('pv-src'), sg = src.getContext('2d'), colour = '#f2c14e', last = null, timer = 0;
+  function reset() { sg.clearRect(0, 0, src.width, src.height); drawSeal(sg, src.width, src.height); }
+  function theme() { var v = document.documentElement.getAttribute('data-theme'); return H.plate.media[v] ? v : 'dusk'; }
+  function put(host, c, label) { c.setAttribute('role', 'img'); c.setAttribute('aria-label', label); host.textContent = ''; host.appendChild(c); }
+  var cells = H.looks.map(function (l) { var wrap = document.createElement('div'), box = document.createElement('div'), p = document.createElement('p'); p.className = 'hmp-label'; p.textContent = l.name + ' · ' + H.plate.media[l.id].name; wrap.appendChild(box); wrap.appendChild(p); document.getElementById('pv-row').appendChild(wrap); return { box: box, look: l, m: H.plate.media[l.id] }; });
+  function draw() {
+    var id = theme(), m = H.plate.media[id], name = (H.looks.filter(function (l) { return l.id === id; })[0] || {}).name;
+    put(document.getElementById('pv-big'), H.plate(id, src), 'The seal as ' + m.name.toLowerCase() + ', in ' + name + ', with the sound word SLAP');
+    document.getElementById('pv-cap').textContent = name + ' · ' + m.name + ' · accent: ' + m.accent;
+    var small = document.createElement('canvas'); small.width = small.height = 280; small.getContext('2d').drawImage(src, 0, 0, 280, 280);
+    cells.forEach(function (c) { put(c.box, H.plate(c.look.id, small), 'The seal as ' + c.m.name.toLowerCase() + ', in ' + c.look.name); });
+  }
+  function soon() { clearTimeout(timer); timer = setTimeout(draw, 90); }
+  function at(e) { var r = src.getBoundingClientRect(); return [(e.clientX - r.left) * src.width / r.width, (e.clientY - r.top) * src.height / r.height]; }
+  function dab(a, b) { sg.strokeStyle = colour; sg.lineWidth = 26; sg.lineCap = 'round'; sg.beginPath(); sg.moveTo(a[0], a[1]); sg.lineTo(b[0], b[1]); sg.stroke(); }
+  src.addEventListener('pointerdown', function (e) { src.setPointerCapture(e.pointerId); last = at(e); dab(last, last); soon(); });
+  src.addEventListener('pointermove', function (e) { if (!last) return; var p = at(e); dab(last, p); last = p; soon(); });
+  ['pointerup', 'pointercancel'].forEach(function (n) { src.addEventListener(n, function () { last = null; }); });
+  var sws = Array.prototype.slice.call(document.querySelectorAll('.pv-plate .sw'));
+  sws.forEach(function (b) { b.addEventListener('click', function () { colour = b.getAttribute('data-c'); sws.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); });
+  document.getElementById('pv-again').addEventListener('click', function () { reset(); draw(); });
+  reset(); draw(); if (document.fonts && document.fonts.load) document.fonts.load('20px "Archivo Black"').then(draw, function () {});
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+</script></body></html>

@@ -1,6 +1,9 @@
-/* Hypermetapunk 0.4.0 · types, as documentation of window.Hypermetapunk */
+/* Hypermetapunk 0.5.0 · types, as documentation of window.Hypermetapunk */
 type HmpThemeId = 'dusk' | 'zine' | 'contrast';
-interface HmpLook { id: HmpThemeId; name: string; light: boolean; motion: boolean; print: boolean; line: string; }
+/** mood (0.5.0, family F10): what the theme rewards in play. Night looks reward a light source, print looks impact and tempo. */
+interface HmpLook { id: HmpThemeId; name: string; light: boolean; motion: boolean; print: boolean; mood: 'still' | 'impact' | 'lit'; line: string; }
+/** 0.5.0 (family F9): the three plate materials, by theme */
+interface HmpMedium { id: 'neon' | 'xerox' | 'solid'; name: string; accent: string; }
 interface HmpFinding { rule: string; severity: 'warn' | 'info'; count: number; sample: string; fix: string; }
 type HmpInk = [number, number, number] | [number, number, number, number];
 interface HmpPen {
@@ -44,6 +47,13 @@ interface Hypermetapunk {
   /** from the add-on components/pen.js (0.3.0), which also works without bundle.js */
   pen?(look?: HmpThemeId | Element, opts?: { still?: boolean }): HmpPen;
   penVersion?: string;
+  /** from the add-on components/plate.js (0.5.0), loaded after pen.js; bundle.js is not needed. One drawing, printed in the theme's material:
+      source is a canvas of flat fills on transparency, and a new canvas of the same size comes back. word: the sound word ('' for none). */
+  plate?: ((theme: HmpThemeId | Element | undefined, source: HTMLCanvasElement, opts?: { word?: string; seed?: number; font?: string }) => HTMLCanvasElement) & { media: Record<HmpThemeId, HmpMedium>; version: string };
+  /** the family's two shared helpers, the same as Depthfield's and Storeybrook's */
+  tint?(source: HTMLCanvasElement, colour: string): HTMLCanvasElement;
+  edges?(source: HTMLCanvasElement, rgb: [number, number, number], gain?: number): HTMLCanvasElement;
+  plateVersion?: string;
   /** from the add-on components/pets.js (0.4.0), which also works without bundle.js */
   pets?: HmpPets;
   init(): Hypermetapunk;

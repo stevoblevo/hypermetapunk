@@ -34,13 +34,13 @@
  },
  "blobs": {},
  "createdOnFiles": {
-  "at": "2026-11-04T02:30:00Z",
+  "at": "2026-11-25T22:00:00Z",
   "v": 1
  },
  "lastChange": {
   "by": "Bleve",
-  "at": "2026-11-04T02:30:00Z",
+  "at": "2026-11-25T22:00:00Z",
   "via": "Claude",
-  "note": "Hypermetapunk 0.1: lifted from the Kit v0 seed in storeybrook/show-tell/bespoke (parents Storeybrook × Depthfield). Three themes (dusk, zine, contrast) measured at 4.5:1 or better, open-licence type, thirteen components, window.Hypermetapunk. Family tasks H1 to H3."
+  "note": "Hypermetapunk 0.5: the plate and the moods. Plate (Hypermetapunk.plate in components/plate.js, an add-on after pen.js: one drawing printed as a neon halftone, a xerox with one red or a solid cut, the sound word as its one accent; family F9) and looks[].mood (lit or impact; family F10). The front page's headline stands at chrome's size on phones."
  }
 }

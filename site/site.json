@@ -164,6 +164,14 @@
    "summary": "A theme's inks and its horizon for canvas: `Hypermetapunk.pen(theme)` resolves the theme's colours to RGB and draws the dusk band, the banded sun, the grid floor, chrome lettering and misregistered type, so a game drawn on canvas looks like the page around it."
   },
   {
+   "name": "Plate",
+   "group": "Horizon",
+   "height": 640,
+   "preview": "project/components/Plate/preview.html",
+   "readme": "project/components/Plate/README.md",
+   "summary": "One drawing, printed in a theme's material: `Hypermetapunk.plate(theme, source)` takes a canvas of flat fills on transparency and returns the same drawing as a neon halftone, a xerox with one red, or a solid cut."
+  },
+  {
    "name": "Sun",
    "group": "Horizon",
    "height": 260,

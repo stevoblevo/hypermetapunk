@@ -1,5 +1,5 @@
 {
-  "latest": "0.4.0",
+  "latest": "0.5.0",
   "versions": {
     "0.1.0": {
       "tokens.css": "3e3cedcd2934458657c4dfd81b23ff513ef90c1425b9e0bc0a16b74ae2c3e58b",
@@ -45,6 +45,15 @@
       "index.d.ts": "28326fc35b9e7179cfb2ec2e481bca6de79d174a84e91900df35eb2aad3b8bf3",
       "pen.js": "de4a19c890de95182127cc4068dba42bc104a7f7c0fe806550fc208674b183b8",
       "pets.js": "4129134fe5bb0552fb5a31613bfb64f5239c538ae35bc31d48bb21c2cc46216d"
+    },
+    "0.5.0": {
+      "tokens.css": "bdee21967922ae7880bb08c0abe13317570f2685fa848e10f50c5826d03bc1a2",
+      "bundle.css": "a5ad6d4f01f15579b90057d11d1291cc4791cfa68994fe19af6a7d4de2420018",
+      "bundle.js": "1e6d332d371d6869aaa0a2f06905d2d23f12f44d56401c836a92b46067f9a1cc",
+      "index.d.ts": "7aff90e93d4cf5bb880059a21d9d56133ab36ad54c34b916dd8d98f562a90587",
+      "pen.js": "7ec5142fc34beb1349d027199207abecd144a43379ecbccabe9f1ab895eee732",
+      "pets.js": "4129134fe5bb0552fb5a31613bfb64f5239c538ae35bc31d48bb21c2cc46216d",
+      "plate.js": "1d205cb48ce88aaec343c8643d2605898754bfdfff36050f6e6814499778d902"
     }
   }
 }

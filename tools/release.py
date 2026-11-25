@@ -4,7 +4,7 @@ import hashlib, json, re
 from pathlib import Path
 r = Path(__file__).resolve().parents[1]
 version = re.search(r"var VERSION = '([^']+)'", (r/'project/components/bundle.js').read_text()).group(1)
-files = {'tokens.css': 'project/tokens.css', 'bundle.css': 'project/components/bundle.css', 'bundle.js': 'project/components/bundle.js', 'index.d.ts': 'project/components/index.d.ts', 'pen.js': 'project/components/pen.js', 'pets.js': 'project/components/pets.js'}
+files = {'tokens.css': 'project/tokens.css', 'bundle.css': 'project/components/bundle.css', 'bundle.js': 'project/components/bundle.js', 'index.d.ts': 'project/components/index.d.ts', 'pen.js': 'project/components/pen.js', 'pets.js': 'project/components/pets.js', 'plate.js': 'project/components/plate.js'}
 dest = r/'v'/version
 for name, source in files.items():
     output = dest/name
