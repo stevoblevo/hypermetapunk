@@ -35,7 +35,16 @@
   }
   function frame(now) { paint(now); raf = still() ? 0 : requestAnimationFrame(frame); }
   function wake() { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); }
-  var seen = 'IntersectionObserver' in w ? new IntersectionObserver(function (es) { es.forEach(function (e) { var c = CANS.filter(function (x) { return x.el === e.target; })[0]; if (c) c.away = !e.isIntersecting; }); }) : null;
+  var seen = 'IntersectionObserver' in w ? new IntersectionObserver(function (es) {
+    var returned = false;
+    es.forEach(function (e) {
+      var c = CANS.filter(function (x) { return x.el === e.target; })[0];
+      if (!c) return;
+      returned = returned || (c.away && e.isIntersecting);
+      c.away = !e.isIntersecting;
+    });
+    if (returned && still()) wake();
+  }) : null;
   function watch(canvas, id) { var c = { el: canvas, id: id, away: false }; CANS.push(c); if (seen) seen.observe(canvas); wake(); return c; }
   function unwatch(canvas) { CANS = CANS.filter(function (c) { return c.el !== canvas; }); if (seen) seen.unobserve(canvas); }
 
@@ -68,7 +77,11 @@
   function hide(now) {
     clearTimeout(hideT); if (!layer || !layer.firstChild) return;
     var wrap = layer.firstChild;
-    function gone() { if (cardCanvas) { unwatch(cardCanvas); cardCanvas = null; } layer.textContent = ''; }
+    function gone() {
+      if (layer.firstChild !== wrap) return;
+      if (cardCanvas) { unwatch(cardCanvas); cardCanvas = null; }
+      layer.textContent = '';
+    }
     if (now || still()) { gone(); return; }
     wrap.classList.add('is-out'); setTimeout(gone, 340);
   }

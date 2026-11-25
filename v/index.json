@@ -1,5 +1,5 @@
 {
-  "latest": "0.5.0",
+  "latest": "0.5.1",
   "versions": {
     "0.1.0": {
       "tokens.css": "3e3cedcd2934458657c4dfd81b23ff513ef90c1425b9e0bc0a16b74ae2c3e58b",
@@ -70,6 +70,20 @@
       "index.html": "43f0e6ad47a8e9265f879fa331e61d79d0bf6ade0f30c1390b977666323d954e",
       "site/front.css": "abd26f48717dd3a59d60ecae101b815e01df74376acb5ff803d6cb9ef7b9c56c",
       "site/front.js": "f5bd2f90fad3ddf7cd2748dc7498931b65c67f9d4006db1c6f8be4b79604966f",
+      "site/hooks.css": "386534b59163db146e49d758206f05295cec40bd604557e9ad41852c58bcd319",
+      "site/immersive.js": "4ffc49752d1279855660f39cf542e258428fd354965658f1af972012788cb41a"
+    },
+    "0.5.1": {
+      "tokens.css": "bdee21967922ae7880bb08c0abe13317570f2685fa848e10f50c5826d03bc1a2",
+      "bundle.css": "a5ad6d4f01f15579b90057d11d1291cc4791cfa68994fe19af6a7d4de2420018",
+      "bundle.js": "57e28f3f68d7fb675c8b5c3b718ed0c813c2e456d4994147e2a7218a29abae95",
+      "index.d.ts": "7aff90e93d4cf5bb880059a21d9d56133ab36ad54c34b916dd8d98f562a90587",
+      "pen.js": "7ec5142fc34beb1349d027199207abecd144a43379ecbccabe9f1ab895eee732",
+      "pets.js": "c1c75c645522c787acfb149f435475c4e2d591182e884383862f4f33568eb9ee",
+      "plate.js": "1d205cb48ce88aaec343c8643d2605898754bfdfff36050f6e6814499778d902",
+      "index.html": "b1ffbbaf76ca57eb8754c5e92e5d785d6db865cc35c40b06a3466d09024e65be",
+      "site/front.css": "abd26f48717dd3a59d60ecae101b815e01df74376acb5ff803d6cb9ef7b9c56c",
+      "site/front.js": "2b1c505286dcb87be4f97653f1319aa2c0479026f1f2510537377fd1bb6810b0",
       "site/hooks.css": "386534b59163db146e49d758206f05295cec40bd604557e9ad41852c58bcd319",
       "site/immersive.js": "4ffc49752d1279855660f39cf542e258428fd354965658f1af972012788cb41a"
     }

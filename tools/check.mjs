@@ -104,7 +104,7 @@ try {
     H.looks.forEach(l=>{const c=H.plate(l.id,src),d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;let n=0,sum=0;for(let i=0;i<d.length;i+=4){if(d[i+3]===255)n++;sum+=d[i]+d[i+1]*3+d[i+2]*7;}out.plates[l.id]={w:c.width,h:c.height,opaque:n/(d.length/4),unique:!seen[sum]};seen[sum]=1;});
     out.sourceKept=src.toDataURL()===before; out.same=H.plate('zine',src).toDataURL()===H.plate('zine',src).toDataURL(); out.noWord=H.plate('dusk',src,{word:''}).toDataURL()!==H.plate('dusk',src).toDataURL();
     out.helpers=H.tint(src,'#f00').width===200&&H.edges(src,[0,0,0],2).height===200; out.named=document.querySelectorAll('canvas[role="img"][aria-label]').length; return out;});
-  assert.deepEqual(plates.moods,['dusk:lit','zine:impact','contrast:impact']); assert.deepEqual(plates.media,['dusk','zine','contrast']); assert.equal(plates.version,'0.5.0');
+  assert.deepEqual(plates.moods,['dusk:lit','zine:impact','contrast:impact']); assert.deepEqual(plates.media,['dusk','zine','contrast']); assert.equal(plates.version,'0.5.1');
   for(const [id,p] of Object.entries(plates.plates)){assert.equal(p.w,200,id);assert.equal(p.h,200,id);assert.ok(p.opaque>0.99,`${id} covers its ground`);assert.ok(p.unique,`${id} is its own picture`);}
   assert.ok(plates.sourceKept,'the source drawing is never changed'); assert.ok(plates.same,'a plate is deterministic'); assert.ok(plates.noWord,'the sound word can be left out'); assert.ok(plates.helpers,'tint and edges'); assert.equal(plates.named,5,'the source, the large plate and three small ones are named pictures');
   // a tap paints a dot, and a picked colour shows on the drawing's frame (Bleve's comment, 25 Nov)

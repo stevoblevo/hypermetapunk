@@ -1,4 +1,4 @@
-/* Hypermetapunk 0.4.0 · crossing pets, the third set (plan C5): five dusk pets in the family's shared save.
+/* Hypermetapunk 0.5.1 · crossing pets, the third set (plan C5): five dusk pets in the family's shared save.
    Hypermetapunk.pets   { kit, key, version, list, has(id), find(id), count(), total(), draw(ctx, id, o) }
    The save is localStorage['crossing:pets'] on stevoblevo.github.io, shared with Storeybrook's day pets ('sb:') and
    Depthfield's night pets ('df:'): { found: { 'hmp:<id>': ms, … }, active: { sb: id } }. This file only ever adds
@@ -8,7 +8,7 @@
   'use strict';
   var H = w.Hypermetapunk = w.Hypermetapunk || {};
   if (H.pets) return;
-  var VERSION = '0.4.0', KIT = 'hmp', KEY = 'crossing:pets', SITE = 'https://stevoblevo.github.io/hypermetapunk/';
+  var VERSION = '0.5.1', KIT = 'hmp', KEY = 'crossing:pets', SITE = 'https://stevoblevo.github.io/hypermetapunk/';
   var FAMILY = { sb: 7, df: 5 };   /* Storeybrook has seven day pets, Depthfield five night pets */
   var LIST = [
     { id: 'sticker-cat', name: 'Vinyl', line: 'Came off with the sticker. Still a bit tacky.', how: 'Peel a sticker off the parts board.', where: SITE + '#parts' },
@@ -19,7 +19,7 @@
   ];
 
   /* ---------- the shared save ---------- */
-  var MEM = {};   /* what was found this visit, for when storage is blocked */
+  var MEM = {}, pending = {};   /* what was found this visit, for when storage is blocked */
   function store() { try { return w.localStorage || null; } catch (e) { return null; } }
   function read() {
     try { var s = store(), v = s && JSON.parse(s.getItem(KEY) || 'null'); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch (e) { return {}; }
@@ -33,7 +33,10 @@
   function find(id) {
     var p = pet(id); if (!p || has(p.id)) return false;
     var v = read(), k = KIT + ':' + p.id;   /* read, add one key, write: the other kits' keys ride along untouched */
-    v.found = found(v); v.found[k] = MEM[k] = Date.now(); write(v);
+    v.found = found(v);
+    Object.keys(pending).forEach(function (key) { if (!v.found[key]) v.found[key] = pending[key]; });
+    v.found[k] = MEM[k] = Date.now();
+    if (write(v)) pending = {}; else pending[k] = v.found[k];
     try { w.dispatchEvent(new CustomEvent('hmp:pet', { detail: { id: p.id, name: p.name, count: count() } })); } catch (e) { /* no window events */ }
     return true;
   }

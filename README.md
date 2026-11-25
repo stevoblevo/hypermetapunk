@@ -1,5 +1,8 @@
 <img src="site/icons/icon-192.png" alt="Hypermetapunk mark" width="84">
 
+
+**Patch 0.5.1:** The pet canvases repaint when they return onscreen with reduced motion on, and a retiring discovery card no longer dismisses the next one. Pending discoveries are saved alongside other kits’ progress on the next successful find. [Open the 0.5.1 showcase](https://stevoblevo.github.io/hypermetapunk/v/0.5.1/).
+
 # Hypermetapunk
 
 A dusk design system with chrome type, a neon horizon and the marks of a print shop: slipped plates, photocopy grain, tape and stickers. Tape can cross the artwork, never the words.
