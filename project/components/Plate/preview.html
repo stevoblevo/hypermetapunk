@@ -6,9 +6,9 @@
 <div class="pv-plate">
 <div class="top">
   <div>
-    <canvas id="pv-src" class="src" width="480" height="480" role="img" aria-label="The drawing: a seal on a rock balancing a star, in flat colours. Drag on it to add to the drawing."></canvas>
+    <canvas id="pv-src" class="src" width="480" height="480" role="img" aria-label="The drawing: a seal on a rock balancing a star, in flat colours. Tap or drag on it to add to the drawing."></canvas>
     <div class="bar" role="group" aria-label="Brush colour"><button class="sw" style="background:#f2c14e" data-c="#f2c14e" aria-pressed="true" aria-label="Yellow"></button><button class="sw" style="background:#6b8fae" data-c="#6b8fae" aria-pressed="false" aria-label="Blue"></button><button class="sw" style="background:#1f2a37" data-c="#1f2a37" aria-pressed="false" aria-label="Dark"></button><button class="hmp-btn hmp-btn--ghost" id="pv-again" type="button">Start over</button></div>
-    <p class="hmp-label">The one drawing · flat fills · drag to add to it</p>
+    <p class="hmp-label">The one drawing · flat fills · pick a brush, then tap or drag</p>
   </div>
   <div><div id="pv-big"></div><p class="hmp-label" id="pv-cap" aria-live="polite"></p></div>
 </div>
@@ -34,12 +34,15 @@
   }
   function soon() { clearTimeout(timer); timer = setTimeout(draw, 90); }
   function at(e) { var r = src.getBoundingClientRect(); return [(e.clientX - r.left) * src.width / r.width, (e.clientY - r.top) * src.height / r.height]; }
-  function dab(a, b) { sg.strokeStyle = colour; sg.lineWidth = 26; sg.lineCap = 'round'; sg.beginPath(); sg.moveTo(a[0], a[1]); sg.lineTo(b[0], b[1]); sg.stroke(); }
+  function dab(a, b) {   /* a tap paints a dot: a stroke of no length paints nothing */
+    sg.strokeStyle = sg.fillStyle = colour; sg.lineWidth = 26; sg.lineCap = 'round'; sg.beginPath(); sg.arc(b[0], b[1], 13, 0, 7); sg.fill();
+    if (a[0] !== b[0] || a[1] !== b[1]) { sg.beginPath(); sg.moveTo(a[0], a[1]); sg.lineTo(b[0], b[1]); sg.stroke(); }
+  }
   src.addEventListener('pointerdown', function (e) { src.setPointerCapture(e.pointerId); last = at(e); dab(last, last); soon(); });
   src.addEventListener('pointermove', function (e) { if (!last) return; var p = at(e); dab(last, p); last = p; soon(); });
   ['pointerup', 'pointercancel'].forEach(function (n) { src.addEventListener(n, function () { last = null; }); });
   var sws = Array.prototype.slice.call(document.querySelectorAll('.pv-plate .sw'));
-  sws.forEach(function (b) { b.addEventListener('click', function () { colour = b.getAttribute('data-c'); sws.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); });
+  sws.forEach(function (b) { b.addEventListener('click', function () { colour = b.getAttribute('data-c'); src.style.borderColor = colour; src.style.borderStyle = 'solid'; sws.forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); }); });
   document.getElementById('pv-again').addEventListener('click', function () { reset(); draw(); });
   reset(); draw(); if (document.fonts && document.fonts.load) document.fonts.load('20px "Archivo Black"').then(draw, function () {});
   new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });

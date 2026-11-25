@@ -107,6 +107,11 @@ try {
   assert.deepEqual(plates.moods,['dusk:lit','zine:impact','contrast:impact']); assert.deepEqual(plates.media,['dusk','zine','contrast']); assert.equal(plates.version,'0.5.0');
   for(const [id,p] of Object.entries(plates.plates)){assert.equal(p.w,200,id);assert.equal(p.h,200,id);assert.ok(p.opaque>0.99,`${id} covers its ground`);assert.ok(p.unique,`${id} is its own picture`);}
   assert.ok(plates.sourceKept,'the source drawing is never changed'); assert.ok(plates.same,'a plate is deterministic'); assert.ok(plates.noWord,'the sound word can be left out'); assert.ok(plates.helpers,'tint and edges'); assert.equal(plates.named,5,'the source, the large plate and three small ones are named pictures');
+  // a tap paints a dot, and a picked colour shows on the drawing's frame (Bleve's comment, 25 Nov)
+  const tapBefore=await pf.evaluate(()=>document.querySelector('#pv-src').toDataURL()); await pf.locator('.sw[data-c="#6b8fae"]').click();
+  assert.equal(await pf.evaluate(()=>getComputedStyle(document.querySelector('#pv-src')).borderTopColor),'rgb(107, 143, 174)','the frame takes the brush colour');
+  const sb=await pf.locator('#pv-src').boundingBox(); await page.mouse.click(sb.x+sb.width*.15,sb.y+sb.height*.9); await page.waitForTimeout(250);
+  assert.notEqual(await pf.evaluate(()=>document.querySelector('#pv-src').toDataURL()),tapBefore,'a tap paints');
   const hp=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true}); hp.on('pageerror',e=>problems.push(String(e)));
   for(const theme of ['dusk','zine','contrast']){ await hp.goto(`${base}/?theme=${theme}`); await hp.evaluate(()=>document.fonts.ready);
     assert.ok(await hp.evaluate(()=>parseFloat(getComputedStyle(document.querySelector('.fr-hero h1')).fontSize))>=32,`${theme}: the phone headline is at chrome's size`);
