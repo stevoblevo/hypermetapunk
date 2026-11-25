@@ -1,6 +1,8 @@
 <img src="site/icons/icon-192.png" alt="Hypermetapunk mark" width="84">
 
 
+**Patch 0.5.2:** The Zine plate prints its middle tones as a coarse dot screen and keeps the one red for what was warm to begin with, like a sun or a star, instead of filling every middle tone with it. [Open the 0.5.2 showcase](https://stevoblevo.github.io/hypermetapunk/v/0.5.2/).
+
 **Patch 0.5.1:** The pet canvases repaint when they return onscreen with reduced motion on, and a retiring discovery card no longer dismisses the next one. Pending discoveries are saved alongside other kits’ progress on the next successful find. [Open the 0.5.1 showcase](https://stevoblevo.github.io/hypermetapunk/v/0.5.1/).
 
 # Hypermetapunk

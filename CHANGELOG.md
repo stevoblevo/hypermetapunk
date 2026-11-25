@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.2
+
+- The Zine plate, reworked (Bleve: "a few looks still need work, mostly Hypermetapunk"). The middle tones are a coarse dot screen at 45 degrees whose dots grow with the dark; darks stay toner and lights stay paper. The one red is now a spot colour for what was warm in the drawing (a sun, a lamp, a star, a red stripe), still a hair off register. Before, every middle tone took the red and filled its shape, so most drawings came out as one red silhouette. The same change reached Saelion Rock 0.2's Zine. `plate.version` is 0.5.2.
+- The front page's version sticker reads the current version (it still read 0.5.0 in 0.5.1).
+- All published runtimes from 0.1.0 to 0.5.1 remain unchanged; `pets.js` is byte-identical to 0.5.1.
+
+## 0.5.1
+
+- Sae's patch: pet canvases repaint when they return onscreen with reduced motion on; a retiring discovery card no longer dismisses the next one; pending discoveries are saved alongside other kits' progress. See the README.
+
 ## 0.5.0
 
 - The plate (family F9, the Hypermetapunk half): a new add-on, `components/plate.js`, loaded after `pen.js`. `Hypermetapunk.plate(theme, source, { word, seed, font })` takes one canvas of flat fills on transparency and returns a new canvas of the same size in the theme's material: a neon halftone in Dusk, a xerox with one red in Zine, a solid cut in High contrast. The accent is always the sound word (`SLAP` unless told otherwise; `word: ''` leaves it out), placed in the emptiest corner. `Hypermetapunk.tint` and `Hypermetapunk.edges` are the family's two shared helpers. It reads no CSS and never changes the source.
