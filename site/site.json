@@ -156,12 +156,36 @@
    "summary": "A neon grid floor that runs toward you under the dusk band; together with the Sun it makes the Horizon, the system's one scene."
   },
   {
+   "name": "Pen",
+   "group": "Horizon",
+   "height": 590,
+   "preview": "project/components/Pen/preview.html",
+   "readme": "project/components/Pen/README.md",
+   "summary": "A theme's inks and its horizon for canvas: `Hypermetapunk.pen(theme)` resolves the theme's colours to RGB and draws the dusk band, the banded sun, the grid floor, chrome lettering and misregistered type, so a game drawn on canvas looks like the page around it."
+  },
+  {
+   "name": "Plate",
+   "group": "Horizon",
+   "height": 640,
+   "preview": "project/components/Plate/preview.html",
+   "readme": "project/components/Plate/README.md",
+   "summary": "One drawing, printed in a theme's material: `Hypermetapunk.plate(theme, source)` takes a canvas of flat fills on transparency and returns the same drawing as a neon halftone, a xerox with one red, or a solid cut."
+  },
+  {
    "name": "Sun",
    "group": "Horizon",
    "height": 260,
    "preview": "project/components/Sun/preview.html",
    "readme": "project/components/Sun/README.md",
    "summary": "The banded disc at the horizon: acid light at the top, tangerine, then magenta, cut by bars that thin toward the bottom."
+  },
+  {
+   "name": "Pets",
+   "group": "Punk",
+   "height": 660,
+   "preview": "project/components/Pets/preview.html",
+   "readme": "project/components/Pets/README.md",
+   "summary": "Five dusk pets, the family's third set of crossing pets, found by doing what the kit is for and kept in the save Storeybrook's day pets and Depthfield's night pets already share: `Hypermetapunk.pets` records them and draws them on canvas, dancing to a beat with a swing."
   },
   {
    "name": "Scrawl",

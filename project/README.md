@@ -4,7 +4,7 @@ Hypermetapunk is the third design system in Bleve's family, the child of Storeyb
 
 It began as a block of CSS at the top of one page, "Hypermetapunk Kit v0", written for bespoke.gig on 1 November 2026 (in `storeybrook/show-tell/bespoke/`). Version 0.1 lifts that seed into the family's format: tokens with themes, components with guidelines and live previews, a behaviour bundle, and this book.
 
-Current runtime: **0.2.0**. 0.2.0 is the punk-damage pass: the wave is printed, not rendered — hard toner bands, heavier grain, slipped plates, a taped sun, a torn grid — and slaps may now cross the artwork, never the words. The 0.1.1 Chrome keyline keeps lettering readable over the High contrast sun; 0.1.2 adds [custom accents](components/Accent/README.md). Original runtime versions remain available under `v/`.
+Current runtime: **0.5.0**. 0.5.0 adds the plate (`components/plate.js`, `Hypermetapunk.plate(theme, source)`: one drawing printed as a neon halftone, a xerox with one red or a solid cut, with the sound word as its one accent) and a mood on every theme, and sets the front page's one long word at chrome's size on phones. 0.4.0 added the crossing pets (`components/pets.js`, `Hypermetapunk.pets`: five dusk pets in the save Storeybrook and Depthfield share, found on the front page by peeling, stopping, slipping, printing and opening, and drawn on canvas dancing with a swing) and teaches the pen to die-cut any drawing as a sticker. 0.3.0 added the pen (`components/pen.js`, `Hypermetapunk.pen(theme)`: the horizon, chrome lettering and print materials on canvas, for games). 0.2.0 was the punk-damage pass: the wave is printed, not rendered — hard toner bands, heavier grain, slipped plates, a taped sun, a torn grid — and slaps may now cross the artwork, never the words. The 0.1.1 Chrome keyline keeps lettering readable over the High contrast sun; 0.1.2 adds [custom accents](components/Accent/README.md). Original runtime versions remain available under `v/`.
 
 ## When to use it
 
@@ -30,7 +30,7 @@ A theme changes materials, never content, order or meaning.
 
 - `01-wave.md` to `08-code.md`: the chapters.
 - `tokens.json`: every token, three themes. `tokens.css` is compiled from it by `site/build.py`.
-- `components/`: `bundle.css`, `bundle.js` (`window.Hypermetapunk`), `index.d.ts`, and a folder per component with its guidelines and a live preview.
+- `components/`: `bundle.css`, `bundle.js` (`window.Hypermetapunk`), `index.d.ts`, the add-ons `pen.js` and `pets.js`, and a folder per component with its guidelines and a live preview.
 - `assets/Mark/`: the mark.
 
 The family's shared plan and contracts are in `stevoblevo/depthfield`, `docs/family.md`.

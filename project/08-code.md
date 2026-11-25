@@ -24,6 +24,10 @@
 
 `bundle.css` 24 KB, `bundle.js` 16 KB. No dependencies, no network except the fonts.
 
+## The plate, an add-on
+
+`components/plate.js` (0.5.0) is loaded after `pen.js` by pages and games that make plates; `bundle.js` is not needed. It adds `Hypermetapunk.plate(theme, source, opts)`, which takes one canvas of flat fills on transparency and returns a new canvas of the same size in the theme's material, and the family's two helpers, `Hypermetapunk.tint` and `Hypermetapunk.edges`. Its colours are the pen's inks, it reads no CSS, and it never changes the source. Its budget is 12 KB. Make a plate once and keep the canvas; do not make plates in an animation frame.
+
 ## The family
 
 Hypermetapunk keeps the family contracts (shared token names, complete theme blocks, a runtime on `window`, reduced motion everywhere, versions never replaced). Its plan and open tasks (H4 onward: the showcase, bespoke.gig rebuilt on the kit, a pen for AND SO's `hmp` skin) are in `stevoblevo/depthfield`, `docs/family.md`.

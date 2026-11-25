@@ -9,6 +9,7 @@ Read these first: `docs/plan.md` (this system's tasks, in a suggested order), `d
 ```
 python3 -I site/build.py
 python3 -I tools/contrast.py
+python3 -I tools/pen-inks.py           # the pen's inks still match tokens.json
 node tools/check.mjs                  # front page and docs, three themes, desktop and phone (needs Playwright)
 python3 -m http.server 8703
 ```
@@ -22,5 +23,6 @@ Before pushing: the build leaves no diff, the contrast check passes, and the fro
 - Text on stickers is `punk-ink`; slaps never cover running text; running text is never turned. Every text pair stays at 4.5:1 or better.
 - `site/immersive.js`, `site/app.*`, `site/build.py` and `docs.html` are shared with Depthfield and Storeybrook: change them in all three or not at all.
 - Never replace a published build; add a version. Never delete another agent's work.
+- The front page is part of a release. `tools/release.py` freezes `index.html` and the `site/` files it loads under `v/<version>/`, so every version keeps its own address (`/v/0.5.0/`). After a release, a change to `index.html`, `site/front.*`, `site/hooks.css` or `site/immersive.js` needs a new version; the release tool refuses to rewrite a frozen page. `tools/landing.py --rev <revision> --version <x.y.z>` back-fills a front page from history.
 - No other studio's characters, logos or names. Words follow `project/07-writing.md`.
 - No credentials, services or schedules get added without Bleve's go-ahead.

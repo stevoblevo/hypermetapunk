@@ -1,0 +1,146 @@
+<!doctype html>
+<!-- The front page of release 0.2.0, frozen by tools/landing.py. The current one is at ../../ -->
+<html lang="en" data-theme="dusk">
+<head>
+<meta charset="utf-8">
+<link rel="canonical" href="../../">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0618">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="../../project/assets/Mark/hypermetapunk-mark.svg">
+<link rel="apple-touch-icon" href="../../site/icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hypermetapunk">
+<style>/* painted before any stylesheet arrives, so a slow font never leaves a white screen */ html{background:#0b0618;color-scheme:dark}</style>
+<title>Hypermetapunk — dusk, chrome and stickers</title>
+<meta name="description" content="Hypermetapunk, the third design system in the Storeybrook and Depthfield family: hyperreal dusk, chrome and neon, slapped with stickers, stamps, tape and marker.">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="site/hooks.css">
+<link rel="stylesheet" href="bundle.css">
+<link rel="stylesheet" href="site/front.css">
+</head>
+<body class="hmp-body hmp-no-js">
+<a class="fr-skip" href="#parts">Skip to the parts</a>
+
+<header class="fr-bar">
+  <a class="fr-brand" href="#top"><img src="../../project/assets/Mark/hypermetapunk-mark.svg" alt="" width="34" height="34"><span>hyper<b>meta</b>punk</span></a>
+  <span class="hmp-sticker fr-ver" aria-label="Version 0.2.0">v0.2.0</span>
+  <nav class="fr-themes" aria-label="Theme">
+    <button class="hmp-btn hmp-btn--ghost hmp-btn--sm" type="button" data-hmp-theme="dusk">Dusk</button>
+    <button class="hmp-btn hmp-btn--ghost hmp-btn--sm" type="button" data-hmp-theme="zine">Zine</button>
+    <button class="hmp-btn hmp-btn--ghost hmp-btn--sm" type="button" data-hmp-theme="contrast">Contrast</button>
+  </nav>
+  <div class="fr-tools">
+    <button class="hmp-btn hmp-btn--ghost hmp-btn--sm fr-still" type="button" data-hmp-still>Hold still</button>
+    <button class="hmp-btn hmp-btn--ghost hmp-btn--sm fr-full" type="button" data-immersive hidden><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span data-immersive-label>Full screen</span></button>
+    <a class="hmp-btn hmp-btn--sm" href="../../docs.html">Docs</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hmp-horizon hmp-grain fr-hero" aria-labelledby="h-top">
+  <span class="hmp-sun fr-sun" aria-hidden="true"></span>
+  <div class="hmp-gridfloor" aria-hidden="true"></div>
+  <span class="hmp-tape hmp-tape--cross" aria-hidden="true"></span>
+  <div class="fr-in">
+    <p class="hmp-label fr-kicker">The third toolkit · child of Storeybrook and Depthfield</p>
+    <h1 class="hmp-chrome hmp-display-xl" id="h-top">Hypermetapunk</h1>
+    <p class="hmp-lede fr-lede">Hyperreal dusk, chrome and neon, slapped with stickers, stamps, tape and marker. For gig boards, zines, launch nights and game hubs after dark: places where strange, hand-made work meets its people.</p>
+    <p class="fr-actions"><a class="hmp-btn" href="../../docs.html">Read the docs</a><a class="hmp-btn hmp-btn--ghost" href="#parts">See the parts</a></p>
+    <p class="hmp-scrawl fr-note">← loud on purpose. still reads.<small>— the family</small></p>
+  </div>
+</section>
+
+<div class="hmp-ticker" aria-label="What is in 0.1"><div class="hmp-ticker__track"><span>Three themes: dusk, zine, high contrast</span><span>Fourteen components</span><span>Every text pair measured</span><span>Open-licence type</span><span>Reduced motion stops everything</span><a href="../../docs.html#/components">See them all</a></div></div>
+
+<section class="fr-sec" id="parts" aria-labelledby="h-parts">
+  <div class="fr-in">
+    <h2 class="hmp-display-l hmp-misreg" id="h-parts">The parts</h2>
+    <p class="hmp-lede">Two halves. The wave is what looks rendered too well; the punk is what was printed cheaply and stuck on top. Every part below is the real component, running.</p>
+    <div class="fr-grid" data-hmp-slap="11">
+      <article class="hmp-card hmp-card--glass fr-part">
+        <h3>Chrome and the horizon</h3>
+        <p>The dusk band, a banded sun and a grid floor running toward you. One horizon a page; one chrome line, maybe two.</p>
+        <div class="hmp-horizon fr-mini" aria-hidden="true"><span class="hmp-sun" style="--sun:110px"></span><div class="hmp-gridfloor"></div></div>
+        <a href="../../docs.html#/components/GridFloor">GridFloor</a> · <a href="../../docs.html#/components/Sun">Sun</a> · <a href="../../docs.html#/components/Chrome">Chrome</a>
+      </article>
+      <article class="hmp-card fr-part">
+        <span class="hmp-tape hmp-tape--tr" aria-hidden="true"></span>
+        <h3>Stickers</h3>
+        <p>One or two words, outlined and shadowed in photocopy black. They slap the frame and cross the art — the sun, the grid, a picture — never the words.</p>
+        <p class="fr-row"><span class="hmp-sticker">no suits</span> <span class="hmp-sticker hmp-sticker--orange">weird jobs</span> <span class="hmp-sticker hmp-sticker--mint">open now</span></p>
+        <a href="../../docs.html#/components/Sticker">Sticker</a>
+      </article>
+      <article class="hmp-card fr-part">
+        <h3>Stamps and scrawl</h3>
+        <p>A stamp states a status. Scrawl is a person in the margin.</p>
+        <p class="fr-row"><span class="hmp-stamp">approved</span> <span class="hmp-stamp hmp-stamp--cue" style="--tilt:3deg">checked</span></p>
+        <p class="hmp-scrawl">← it really is that simple<small>— Pip</small></p>
+        <a href="../../docs.html#/components/Stamp">Stamp</a> · <a href="../../docs.html#/components/Scrawl">Scrawl</a>
+      </article>
+      <article class="hmp-card hmp-card--glass fr-part">
+        <h3>Buttons and doors</h3>
+        <p>One loud button per region, the rest are ghosts. Doors end a room and go somewhere real.</p>
+        <p class="fr-row"><a class="hmp-btn hmp-btn--sm" href="../../docs.html">Docs</a> <a class="hmp-btn hmp-btn--ghost hmp-btn--sm" href="#themes">Themes</a></p>
+        <a href="../../docs.html#/components/Button">Button</a> · <a href="../../docs.html#/components/Door">Door</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="fr-sec fr-themes-sec" id="themes" aria-labelledby="h-themes">
+  <div class="fr-in">
+    <h2 class="hmp-display-l" id="h-themes">Three themes, one page</h2>
+    <p class="hmp-lede">A theme changes materials, never content, order or meaning. The same three cards, side by side.</p>
+    <fieldset class="hmp-accents"><legend>Make the accent yours</legend>
+  <div class="hmp-accents__row">
+    <button class="hmp-btn hmp-btn--ghost" type="button" data-hmp-accent="#e8ff00"><span class="hmp-accent-swatch" style="--swatch:#e8ff00" aria-hidden="true"></span>Acid</button>
+    <button class="hmp-btn hmp-btn--ghost" type="button" data-hmp-accent="#ff5cba"><span class="hmp-accent-swatch" style="--swatch:#ff5cba" aria-hidden="true"></span>Pink</button>
+    <button class="hmp-btn hmp-btn--ghost" type="button" data-hmp-accent="#7fe9ff"><span class="hmp-accent-swatch" style="--swatch:#7fe9ff" aria-hidden="true"></span>Cyan</button>
+    <button class="hmp-btn hmp-btn--ghost" type="button" data-hmp-accent="#05ffa1"><span class="hmp-accent-swatch" style="--swatch:#05ffa1" aria-hidden="true"></span>Mint</button>
+    <button class="hmp-btn hmp-btn--ghost" type="button" data-hmp-accent="#ff914d"><span class="hmp-accent-swatch" style="--swatch:#ff914d" aria-hidden="true"></span>Orange</button>
+    <label>Custom colour <input type="color" value="#e8ff00" data-hmp-accent-input></label>
+    <button class="hmp-btn hmp-btn--ghost" type="button" data-hmp-accent-reset>Reset accent</button>
+  </div>
+  <p class="hmp-accents__status" data-hmp-accent-status role="status" aria-live="polite">Using this theme’s original accent.</p>
+</fieldset>
+    <div class="fr-trio">
+      <div class="fr-face" data-theme="zine"><div class="hmp-horizon fr-mini" aria-hidden="true"><span class="hmp-sun" style="--sun:90px"></span><div class="hmp-gridfloor"></div></div><h3 class="hmp-display-m">Zine</h3><p>Photocopied in daylight: raw paper, black ink, magenta stamps, the heaviest grain.</p><p class="fr-row"><span class="hmp-sticker">the lead</span> <button class="hmp-btn hmp-btn--sm" type="button" data-hmp-theme="zine">Use zine</button></p></div>
+      <div class="fr-face" data-theme="dusk"><div class="hmp-horizon fr-mini" aria-hidden="true"><span class="hmp-sun" style="--sun:90px"></span><div class="hmp-gridfloor"></div></div><h3 class="hmp-display-m">Dusk</h3><p>The neon night. Hot pink accent, mint cue, chrome over violet.</p><p class="fr-row"><span class="hmp-sticker">v0.1</span> <button class="hmp-btn hmp-btn--sm" type="button" data-hmp-theme="dusk">Use dusk</button></p></div>
+      <div class="fr-face" data-theme="contrast"><div class="hmp-horizon fr-mini" aria-hidden="true"><span class="hmp-sun" style="--sun:90px"></span><div class="hmp-gridfloor"></div></div><h3 class="hmp-display-m">Contrast</h3><p>Black, white and acid. Every pair at 13:1 or better, no glow, no grain.</p><p class="fr-row"><span class="hmp-sticker">v0.1</span> <button class="hmp-btn hmp-btn--sm" type="button" data-hmp-theme="contrast">Use contrast</button></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="fr-sec" aria-labelledby="h-from">
+  <div class="fr-in fr-from">
+    <article class="hmp-card">
+      <span class="hmp-tape hmp-tape--tl" aria-hidden="true"></span>
+      <h2 class="hmp-display-m" id="h-from">Where it came from</h2>
+      <p>On 1 November 2026 a reskin of bespoke.gig began with a block of CSS called "Hypermetapunk Kit v0", parents Storeybrook × Depthfield, "written to be lifted out whole". Version 0.1 lifts it: the kit's names are kept, its contrast is fixed (no more white on orange), its type is open-licence, and it has a brand book, tokens, live components and a page check like its parents.</p>
+      <p>Next on the family plan: bespoke.gig rebuilt on the kit, a pen for AND SO's neon skin, and night pets that cross over from Depthfield.</p>
+      <span class="hmp-stamp">v0.1</span>
+    </article>
+    <p class="hmp-scrawl hmp-scrawl--cyan">any agent can pick a task<small>docs/family.md</small></p>
+  </div>
+</section>
+</main>
+
+<footer class="fr-foot">
+  <div class="fr-in">
+    <nav class="fr-doors" aria-label="Doors">
+      <a class="hmp-door" href="../../docs.html"><span class="hmp-door__arch"></span><span class="hmp-door__cap">The docs</span></a>
+      <a class="hmp-door" href="https://stevoblevo.github.io/storeybrook/"><span class="hmp-door__arch" style="--door-c:var(--wave-tangerine)"></span><span class="hmp-door__cap">Storeybrook</span></a>
+      <a class="hmp-door" href="https://stevoblevo.github.io/depthfield/"><span class="hmp-door__arch" style="--door-c:var(--wave-cyan)"></span><span class="hmp-door__cap">Depthfield</span></a>
+      <a class="hmp-door" href="https://github.com/stevoblevo/depthfield/blob/main/docs/family.md"><span class="hmp-door__arch" style="--door-c:var(--wave-magenta)"></span><span class="hmp-door__cap">The plan</span></a>
+    </nav>
+    <p class="fr-row fr-still-foot"><button class="hmp-btn hmp-btn--ghost hmp-btn--sm" type="button" data-hmp-still>Hold everything still</button></p>
+    <p class="hmp-small fr-fine">Built with Hypermetapunk itself: its tokens, its stylesheet and its behaviour bundle. Add <code>?hmp-taste</code> to the address to check the page against the book.</p>
+  </div>
+</footer>
+<script src="bundle.js"></script>
+<script src="site/immersive.js"></script>
+</body>
+</html>
