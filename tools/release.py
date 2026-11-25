@@ -17,6 +17,7 @@ for name, source in files.items():
     if not output.exists(): output.write_bytes((r/source).read_bytes())
 # the front page is part of the release: freeze it, with the site files it loads, beside the runtime (tools/landing.py)
 import sys
+sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import landing
 landing.snapshot(r, version)
