@@ -1,4 +1,4 @@
-/* Hypermetapunk 0.5.0 · the plate: one drawing, printed in a theme's material (family task F9, the Hypermetapunk half).
+/* Hypermetapunk 0.5.2 · the plate: one drawing, printed in a theme's material (family task F9, the Hypermetapunk half).
    Hypermetapunk.plate(theme, source, o)  takes a canvas of flat fills on transparency and returns a new canvas of the
                                           same size: a neon halftone in Dusk, a xerox with one red in Zine, a solid cut
                                           in High contrast. Nothing is redrawn by hand, and the source is never changed.
@@ -10,7 +10,7 @@
   'use strict';
   var H = w.Hypermetapunk;
   if (!H || !H.pen || H.plate) return;
-  var VERSION = '0.5.0', TAU = Math.PI * 2;
+  var VERSION = '0.5.2', TAU = Math.PI * 2;
   /* one accent per theme: the one mark that is not the subject. Here it is always the sound word, slapped three ways. */
   var MEDIA = {
     dusk: { id: 'neon', name: 'Neon halftone', accent: 'a sound word on a sticker' },
@@ -52,16 +52,6 @@
     }
     sg.putImageData(out, 0, 0); return sc;
   };
-  /* two layers from the drawing's tones: its darks, and the middle band that takes the one spot colour */
-  function split(p, W, Ht, dark, mid, lo, hi) {
-    var a = mk(W, Ht), b = mk(W, Ht), ag = a.getContext('2d'), bg = b.getContext('2d'), ad = ag.createImageData(W, Ht), bd = bg.createImageData(W, Ht), i, L, o, c;
-    for (i = 0; i < p.length; i += 4) {
-      if (p[i + 3] < 128) continue; L = lum(p, i);
-      if (L < lo) { o = ad.data; c = dark; } else if (L < hi) { o = bd.data; c = mid; } else continue;
-      o[i] = c[0]; o[i + 1] = c[1]; o[i + 2] = c[2]; o[i + 3] = 255;
-    }
-    ag.putImageData(ad, 0, 0); bg.putImageData(bd, 0, 0); return [a, b];
-  }
   function word(o) { return String(o.word == null ? 'SLAP' : o.word).toUpperCase(); }
 
   /* ---------- Dusk: a neon halftone. The drawing is a dot screen in the dusk band's own inks, outlined in tube light,
@@ -88,13 +78,30 @@
     g.fillStyle = P.rgb('punk-ink'); g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(t, 0, fs * 0.06); g.restore();
   }
 
-  /* ---------- Zine: a xerox with one red. Darks go to toner, the middle tones to one spot colour off register, the
-     lights are left as paper ---------- */
+  /* ---------- Zine: a xerox with one red. Darks go to toner, the middle tones to a coarse dot screen at 45 degrees, the
+     lights are left as paper. The one red is a spot colour, kept for what was warm to begin with (a sun, a lamp, a star,
+     a red stripe), and it sits a hair off register. 0.5.2: before, every middle tone took the red and filled its shape. ---------- */
+  function warm(p, i) { return p[i] - p[i + 2] > 64 && p[i] > 120 && p[i] - p[i + 1] > -12; }
+  function zineLayers(p, W, Ht, ink, red, lo) {
+    var a = mk(W, Ht), b = mk(W, Ht), ag = a.getContext('2d'), bg = b.getContext('2d'), ad = ag.createImageData(W, Ht), bd = bg.createImageData(W, Ht), i, o, c;
+    for (i = 0; i < p.length; i += 4) {
+      if (p[i + 3] < 128) continue;
+      if (warm(p, i)) { o = bd.data; c = red; } else if (lum(p, i) < lo) { o = ad.data; c = ink; } else continue;
+      o[i] = c[0]; o[i + 1] = c[1]; o[i + 2] = c[2]; o[i + 3] = 255;
+    }
+    ag.putImageData(ad, 0, 0); bg.putImageData(bd, 0, 0); return [a, b];
+  }
   function xerox(P, g, src, W, Ht, k, o, p) {
-    var r = rand(o.seed || 9), i, ink = P.inks['punk-ink'], red = P.inks.accent, L2 = split(p, W, Ht, ink, red, 0.45, 0.74);
+    var r = rand(o.seed || 9), i, x, y, row = 0, L, dk, ink = P.inks['punk-ink'], red = P.inks.accent, LO = 0.3, HI = 0.74, L2 = zineLayers(p, W, Ht, ink, red, LO);
+    var cell = Math.max(4, Math.round(W / 58)), step = cell / Math.SQRT2;
     g.fillStyle = P.rgb('punk-paper'); g.fillRect(0, 0, W, Ht);
     g.drawImage(tint(src, P.rgb('surface', 1)), 0, 0);   /* the lights: a breath of grey, so the paper shape holds */
     g.drawImage(L2[1], 3 * k, 2 * k);                    /* the one red, off register */
+    g.fillStyle = P.rgb('punk-ink');                     /* the middle tones: a dot screen at 45 degrees, the dot growing with the dark */
+    for (y = step / 2; y < Ht; y += step, row++) for (x = (row % 2 ? step : 0) + step / 2; x < W; x += step * 2) {
+      i = ((y | 0) * W + (x | 0)) * 4; if (p[i + 3] < 128 || warm(p, i)) continue; L = lum(p, i); if (L < LO || L >= HI) continue;
+      dk = (HI - L) / (HI - LO); g.beginPath(); g.arc(x, y, cell * 0.6 * Math.sqrt(dk), 0, TAU); g.fill();
+    }
     g.drawImage(L2[0], 0, 0);
     var E = edges(src, ink, 3.6); g.drawImage(E, 0, 0); g.drawImage(E, 0.8 * k, 0.5 * k);
     g.save(); g.fillStyle = P.rgb('punk-ink', 0.07); for (i = 0; i < 3; i++) g.fillRect(Math.round(r() * W), 0, Math.max(1, Math.round((1 + r() * 2) * k)), Ht); g.restore();   /* the copier's streaks */
